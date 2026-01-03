@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Posts | Rich</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <a href="index.html" class="brand__link">Rich</a>
+        <span class="brand__tag">Tech Journal</span>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="posts.html" class="nav__link is-active">Posts</a>
+        <a href="about.html" class="nav__link">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Posts</h1>
+      <p>
+        Long-form notes on what I’m building, breaking, and learning.
+        Each post follows the same structure for clarity and reuse.
+      </p>
+    </section>
+
+    <section class="section">
+      <p style="color: var(--muted);">
+        Posts coming soon.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Rich. Built with GitHub Pages.</p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
