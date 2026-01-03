@@ -107,7 +107,7 @@ em {
 
 code {
   font-family: var(--font-mono);
-  font-size: 0.9em;
+  font-size: 0.875em;
   background: var(--bg-elevated);
   padding: 2px 6px;
   border-radius: 4px;
@@ -375,6 +375,155 @@ main {
   line-height: 1.6;
 }
 
+/* =========================================
+   ARTICLE / POST PAGE STYLES
+   ========================================= */
+.article {
+  max-width: var(--content-width);
+  padding: var(--space-xl) 0 var(--space-3xl);
+}
+
+.article__header {
+  margin-bottom: var(--space-2xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border);
+}
+
+.article__header h1 {
+  margin-bottom: var(--space-md);
+}
+
+.article__meta {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.article__meta::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.article__lead {
+  font-size: 1.1875rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--space-2xl);
+}
+
+/* Article content typography */
+.article__content h2 {
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+
+.article__content h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.article__content h3 {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+.article__content p {
+  margin-bottom: var(--space-lg);
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.article__content ul,
+.article__content ol {
+  margin-bottom: var(--space-lg);
+  padding-left: var(--space-lg);
+  color: var(--text-secondary);
+}
+
+.article__content li {
+  margin-bottom: var(--space-sm);
+  padding-left: var(--space-sm);
+}
+
+.article__content li::marker {
+  color: var(--accent);
+}
+
+.article__content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.article__content a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* Code blocks */
+.article__content pre {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  overflow-x: auto;
+}
+
+.article__content pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Blockquotes */
+.article__content blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: var(--space-lg);
+  margin: var(--space-xl) 0;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+/* Back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border);
+}
+
+.back-link::before {
+  content: '←';
+  transition: transform 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+.back-link:hover::before {
+  transform: translateX(-4px);
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
 .footer {
   margin-top: var(--space-3xl);
   padding-top: var(--space-xl);
@@ -386,6 +535,9 @@ main {
   color: var(--text-tertiary);
 }
 
+/* =========================================
+   RESPONSIVE
+   ========================================= */
 @media (max-width: 640px) {
   html { font-size: 16px; }
   
@@ -406,6 +558,10 @@ main {
   
   .section__head h2::before { display: none; }
   .post-card { padding: var(--space-md); }
+  
+  .article { padding: var(--space-lg) 0 var(--space-2xl); }
+  .article__header { margin-bottom: var(--space-xl); padding-bottom: var(--space-lg); }
+  .article__content pre { padding: var(--space-md); }
 }
 
 :focus-visible {
@@ -425,7 +581,8 @@ main {
 }
 
 .hero,
-.section {
+.section,
+.article {
   animation: fadeUp 0.6s ease-out both;
 }
 
