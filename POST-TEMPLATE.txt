@@ -1,0 +1,126 @@
+================================================================================
+BLOG POST TEMPLATE - Rich's Tech Journal
+================================================================================
+
+Instructions: Fill in all sections below. Save this file with your post date
+and title (e.g., "2026-01-17-learning-react-hooks.txt"), then use the
+conversion script to generate the HTML file.
+
+================================================================================
+
+TITLE: [Your post title here - keep it clear and specific]
+
+CATEGORY: [Choose one: Shipping, Learning, Building, Debugging, Reflecting]
+
+READ TIME: [Estimate in minutes: 4, 5, 6, etc.]
+
+LEAD PARAGRAPH:
+[2-3 sentences that explain what this post is about and why it matters.
+This appears at the top of the post and in post listings.]
+
+
+================================================================================
+MAIN CONTENT
+================================================================================
+
+## The Context
+[1-2 paragraphs explaining what led to this work/learning/problem.
+Set the scene for the reader.]
+
+
+## The Problem / The Work / The Learning
+[Main content here. Use multiple H2 sections if needed.
+Break up text with headings, lists, and code blocks.]
+
+
+## Key Points
+- [First key takeaway or learning]
+- [Second key takeaway or learning]
+- [Third key takeaway or learning]
+- [Additional points as needed]
+
+
+## What I Learned
+[Reflect on the experience. What would you do differently?
+What surprised you? What's clearer now?]
+
+
+## Next Steps
+[What comes next? What will you build on this? What questions remain?
+1 paragraph is enough.]
+
+
+================================================================================
+FORMATTING GUIDE
+================================================================================
+
+Headings: Use ## for section headings
+Bold: **bold text**
+Italic: *italic text*
+Inline code: `code here`
+Links: [link text](URL)
+
+Code blocks:
+```
+Your code here
+Multiple lines
+```
+
+Lists (use bullets or numbers):
+- Bullet item one
+- Bullet item two
+
+1. Numbered item one
+2. Numbered item two
+
+
+================================================================================
+EXAMPLE FILLED IN
+================================================================================
+
+TITLE: Learning React Hooks for State Management
+
+CATEGORY: Learning
+
+READ TIME: 5
+
+LEAD PARAGRAPH:
+I spent the week diving into React hooks after struggling with class components.
+Hooks promise simpler state management and better code organization. This post
+covers what clicked, what confused me, and how I'm using hooks in my projects.
+
+
+## The Context
+I've been building a React dashboard for tracking my learning progress. My
+initial version used class components, but the lifecycle methods felt clunky
+and the code was getting messy. I decided to refactor using hooks.
+
+
+## The Investigation
+I started with the official React docs and built three small examples:
+- A counter using useState
+- A data fetch using useEffect
+- A theme toggle using useContext
+
+The pattern started making sense after the third example.
+
+
+## Key Points
+- useState replaces this.state and this.setState
+- useEffect handles side effects (API calls, subscriptions)
+- Custom hooks let you extract reusable logic
+- Hooks only work in function components
+
+
+## What I Learned
+Hooks aren't just a different syntax - they're a different mental model. Instead
+of thinking about lifecycle, I think about effects and dependencies. The learning
+curve is real, but the code is cleaner.
+
+
+## Next Steps
+I'm going to refactor my dashboard using hooks and build a custom hook for
+API calls. I also want to explore useReducer for more complex state.
+
+
+================================================================================

@@ -40,7 +40,7 @@ After creating a new post, update `posts.html`:
 ```html
 <article class="post-card">
   <h2 class="post-card__title">
-    <a href="posts/YYYY-MM-DD-post-title.html">Your Post Title</a>
+    <a href="posts/YYYY/MM-monthname/YYYY-MM-DD-post-title.html">Your Post Title</a>
   </h2>
   <p class="post-card__meta">DD Mon YYYY · X min read · Category</p>
   <p class="post-card__excerpt">
@@ -49,20 +49,29 @@ After creating a new post, update `posts.html`:
 </article>
 ```
 
+**Note:** Posts are now organized by year and month in folders like `posts/2026/01-january/`
+
 ## File Structure
 
 ```
 github_pages_blog/
-├── posts/                          # All blog posts
-│   └── YYYY-MM-DD-post-title.html # Individual post files
-├── index.html                      # Homepage
-├── posts.html                      # Posts listing page
-├── about.html                      # About page
-├── styles.css                      # Stylesheet
-├── post-template.html              # Template for new posts
-├── new-post.sh                     # Bash script to create posts
-├── new-post.ps1                    # PowerShell script to create posts
-└── BLOG-WORKFLOW.md               # This file
+├── posts/                                    # All blog posts
+│   └── 2026/                                # Year folder
+│       ├── 01-january/                      # Month folder
+│       │   └── 2026-01-03-post-title.html  # Individual post files
+│       ├── 02-february/
+│       └── ...
+├── index.html                               # Homepage
+├── posts.html                               # Posts listing page
+├── about.html                               # About page
+├── styles.css                               # Stylesheet
+├── post-template.html                       # HTML template for new posts
+├── POST-TEMPLATE.txt                        # Text template for drafting
+├── POST-IDEAS.md                            # Running list of post ideas
+├── BLOGGING-PLAN.md                         # Complete blogging plan
+├── new-post.sh                              # Bash script to create posts
+├── new-post.ps1                             # PowerShell script to create posts
+└── BLOG-WORKFLOW.md                         # This file
 
 ```
 
