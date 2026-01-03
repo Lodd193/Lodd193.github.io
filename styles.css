@@ -42,9 +42,9 @@
   
   /* Sizing */
   --content-width: 680px;
-  --sidebar-width: 280px;
+  --sidebar-width: 320px;
   --page-width: 1200px;
-  --article-layout-width: 1080px;
+  --article-layout-width: 1200px;
 }
 
 *, *::before, *::after {
@@ -385,7 +385,7 @@ main {
 .article-layout {
   display: grid;
   grid-template-columns: 1fr var(--sidebar-width);
-  gap: var(--space-3xl);
+  gap: var(--space-2xl);
   max-width: var(--article-layout-width);
   padding: var(--space-xl) 0 var(--space-3xl);
 }
@@ -539,8 +539,8 @@ main {
 .page-layout {
   display: grid;
   grid-template-columns: 1fr var(--sidebar-width);
-  gap: var(--space-3xl);
-  max-width: var(--article-layout-width);
+  gap: var(--space-2xl);
+  max-width: 100%;
   padding: var(--space-xl) 0 var(--space-3xl);
 }
 
