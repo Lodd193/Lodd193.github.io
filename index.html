@@ -6,30 +6,30 @@
   <title>Rich | Tech Journal</title>
   <meta name="description" content="A practical tech journal: what I built, what broke, what I learned." />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
-
+  
   <header class="site-header">
     <div class="container">
       <div class="brand">
         <a href="index.html" class="brand__link">Rich</a>
         <span class="brand__tag">Tech Journal</span>
       </div>
-
-      <nav class="nav">
+      <nav class="nav" aria-label="Main">
         <a href="index.html" class="nav__link is-active">Home</a>
         <a href="posts.html" class="nav__link">Posts</a>
         <a href="about.html" class="nav__link">About</a>
       </nav>
     </div>
   </header>
-
+  
   <main id="content" class="container">
     <section class="hero">
-      <h1>Building in public, without the noise.</h1>
+      <h1>Building in public,<br>without the noise.</h1>
       <p>
-        Short, practical write-ups of what I am learning and shipping.
+        Short, practical write-ups of what I'm learning and shipping. 
         Focus on clarity, real outcomes, and repeatable processes.
       </p>
       <div class="hero__meta">
@@ -39,39 +39,49 @@
         <span class="pill">Systems</span>
       </div>
     </section>
-
+    
     <section class="section">
       <div class="section__head">
         <h2>Latest posts</h2>
         <a class="section__link" href="posts.html">View all</a>
       </div>
-
+      
       <div class="post-list">
         <article class="post-card">
           <h3><a href="posts/2026-01-03-github-pages-first-site.html">My first GitHub Pages site</a></h3>
-          <p class="post-card__meta">03 Jan 2026 • 4 min read • Shipping</p>
+          <p class="post-card__meta">03 Jan 2026 · 4 min read · Shipping</p>
           <p class="post-card__desc">
             What I set up, what I misunderstood, and the exact steps that made it click.
           </p>
         </article>
-
+        
         <article class="post-card">
           <h3><a href="posts/2026-01-04-first-sql-patterns.html">SQL patterns that stopped my mistakes</a></h3>
-          <p class="post-card__meta">04 Jan 2026 • 6 min read • SQL</p>
+          <p class="post-card__meta">04 Jan 2026 · 6 min read · SQL</p>
           <p class="post-card__desc">
             The tiny rules that prevent silent errors in queries.
           </p>
         </article>
       </div>
     </section>
-
+    
     <footer class="footer">
-      <p>© <span id="year"></span> Rich. Built with GitHub Pages.</p>
+      <p>© <span id="year"></span> Rich · Built with GitHub Pages</p>
     </footer>
   </main>
-
+  
   <script>
+    // Year
     document.getElementById("year").textContent = new Date().getFullYear();
+    
+    // Card hover glow effect
+    document.querySelectorAll('.post-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
   </script>
 </body>
 </html>
