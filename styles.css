@@ -123,9 +123,8 @@ a {
 }
 
 .container {
-  width: min(var(--page-width), 100% - var(--space-md));
+  width: min(var(--page-width), calc(100% - var(--space-lg) * 2));
   margin-inline: auto;
-  padding-right: var(--space-md);
 }
 
 .skip {
@@ -554,7 +553,7 @@ main {
    ========================================= */
 .sidebar {
   position: relative;
-  padding-right: var(--space-xl);
+  padding-right: var(--space-2xl);
 }
 
 .sidebar__inner {
@@ -708,6 +707,7 @@ main {
 .focus-text {
   font-size: 0.875rem;
   color: var(--text-secondary);
+  padding-right: var(--space-sm);
 }
 
 /* Category Badges */
@@ -778,6 +778,7 @@ main {
   font-size: 0.875rem;
   color: var(--text-primary);
   font-weight: 500;
+  padding-right: var(--space-md);
 }
 
 /* =========================================
