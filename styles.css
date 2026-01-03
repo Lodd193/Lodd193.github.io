@@ -127,6 +127,14 @@ a {
   margin-inline: auto;
 }
 
+/* Right-align containers with sidebar layouts */
+.container:has(.page-layout),
+.container:has(.article-layout) {
+  margin-left: auto;
+  margin-right: var(--space-md);
+  width: min(var(--page-width), calc(100% - var(--space-md)));
+}
+
 .skip {
   position: absolute;
   left: -9999px;
