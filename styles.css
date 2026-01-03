@@ -42,9 +42,9 @@
   
   /* Sizing */
   --content-width: 680px;
-  --sidebar-width: 600px;
-  --page-width: 1600px;
-  --article-layout-width: 1600px;
+  --sidebar-width: 320px;
+  --page-width: 1200px;
+  --article-layout-width: 1200px;
 }
 
 *, *::before, *::after {
@@ -125,14 +125,6 @@ a {
 .container {
   width: min(var(--page-width), calc(100% - var(--space-md) * 2));
   margin-inline: auto;
-}
-
-/* Right-align containers with sidebar layouts */
-.container:has(.page-layout),
-.container:has(.article-layout) {
-  margin-left: auto;
-  margin-right: var(--space-md);
-  width: min(var(--page-width), calc(100% - var(--space-md)));
 }
 
 .skip {
@@ -392,10 +384,14 @@ main {
 /* Article layout wrapper for two-column */
 .article-layout {
   display: grid;
-  grid-template-columns: 1fr var(--sidebar-width);
-  gap: var(--space-md);
-  max-width: var(--article-layout-width);
+  grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
+  gap: var(--space-lg);
+  max-width: none;
+  width: calc(100vw - var(--space-md));
+  margin-left: calc(-50vw + 50%);
+  margin-right: 0;
   padding: var(--space-xl) 0 var(--space-3xl);
+  padding-right: var(--space-md);
 }
 
 .article {
@@ -547,9 +543,13 @@ main {
 .page-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
-  gap: var(--space-md);
-  max-width: 100%;
+  gap: var(--space-lg);
+  max-width: none;
+  width: calc(100vw - var(--space-md));
+  margin-left: calc(-50vw + 50%);
+  margin-right: 0;
   padding: var(--space-xl) 0 var(--space-3xl);
+  padding-right: var(--space-md);
 }
 
 .page-content {
@@ -561,7 +561,7 @@ main {
    ========================================= */
 .sidebar {
   position: relative;
-  padding-right: 32px;
+  padding-right: 0;
   overflow-x: hidden;
 }
 
@@ -787,7 +787,6 @@ main {
   font-size: 0.875rem;
   color: var(--text-primary);
   font-weight: 500;
-  padding-right: var(--space-sm);
 }
 
 /* =========================================
