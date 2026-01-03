@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About | Rich</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <a href="index.html" class="brand__link">Rich</a>
+        <span class="brand__tag">Tech Journal</span>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="posts.html" class="nav__link">Posts</a>
+        <a href="about.html" class="nav__link is-active">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>About</h1>
+      <p>
+        This is a personal tech journal.
+        I use it to document what I’m learning, what fails, and what actually works.
+      </p>
+    </section>
+
+    <section class="section">
+      <p style="color: var(--muted); max-width: 70ch;">
+        I’m focused on building practical systems and understanding fundamentals.
+        This site is deliberately minimal: fewer posts, more signal, less noise.
+      </p>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Rich. Built with GitHub Pages.</p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
