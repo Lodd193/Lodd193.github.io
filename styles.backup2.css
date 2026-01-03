@@ -325,88 +325,11 @@ main {
   }
 }
 
-.hero h2 {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  font-weight: 400;
-  margin-bottom: var(--space-lg);
-  font-family: var(--font-body);
-}
-
 .hero > p {
   font-size: 1.125rem;
   color: var(--text-secondary);
   line-height: 1.8;
   position: relative;
-  margin-bottom: var(--space-xl);
-}
-
-/* Tech Stack Pills */
-.tech-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  margin-top: var(--space-xl);
-}
-
-.tech-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  border-radius: 100px;
-  border: 1px solid var(--border);
-  background: var(--bg-surface);
-  color: var(--text-secondary);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.tech-pill::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 100px;
-}
-
-.tech-pill--python::before {
-  background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(6, 182, 212, 0.1));
-}
-
-.tech-pill--react::before {
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(14, 165, 233, 0.1));
-}
-
-.tech-pill--node::before {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1));
-}
-
-.tech-pill--sql::before {
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(219, 39, 119, 0.1));
-}
-
-.tech-pill--ml::before {
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(147, 51, 234, 0.1));
-}
-
-.tech-pill--ts::before {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.1));
-}
-
-.tech-pill:hover {
-  transform: translateY(-2px) scale(1.05);
-  border-color: var(--accent);
-  color: var(--text-primary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.tech-pill:hover::before {
-  opacity: 1;
 }
 
 .hero__meta {
@@ -474,46 +397,6 @@ main {
 .section__link:hover { color: var(--accent); }
 .section__link:hover::after { transform: translateX(4px); }
 
-/* CTA Button */
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: 10px 20px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-  color: white;
-  font-size: 0.875rem;
-  font-weight: 600;
-  border-radius: 100px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
-}
-
-.cta-button::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--accent-purple), var(--accent));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
-}
-
-.cta-button:hover::before {
-  opacity: 1;
-}
-
-.cta-button > * {
-  position: relative;
-  z-index: 1;
-}
-
 .post-list {
   display: flex;
   flex-direction: column;
@@ -556,21 +439,6 @@ main {
 
 .post-card:hover::before { opacity: 1; }
 
-.post-card__tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent);
-  background: rgba(14, 165, 233, 0.1);
-  padding: 4px 12px;
-  border-radius: 100px;
-  margin-bottom: var(--space-md);
-  width: fit-content;
-  border: 1px solid rgba(14, 165, 233, 0.2);
-}
-
 .post-card h3 {
   font-size: 1.25rem;
   margin-bottom: var(--space-sm);
@@ -591,16 +459,30 @@ main {
   margin-bottom: var(--space-md);
   display: flex;
   align-items: center;
-  gap: var(--space-md);
-  flex-wrap: wrap;
+  gap: var(--space-sm);
 }
 
-.meta-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+.post-card__meta::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse 2s ease-in-out infinite;
 }
 
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
 
 .post-card__desc {
   color: var(--text-secondary);
@@ -917,99 +799,9 @@ main {
   border-radius: 8px;
 }
 
-/* Profile Avatar */
-.profile-avatar {
-  display: flex;
-  justify-content: center;
-  margin-bottom: var(--space-lg);
-}
-
-.avatar-placeholder {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-purple));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  font-weight: 600;
-  color: white;
-  font-family: var(--font-display);
-  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.3),
-              0 0 0 4px var(--bg-elevated),
-              0 0 0 6px rgba(14, 165, 233, 0.2);
-  transition: all 0.3s ease;
-}
-
-.avatar-placeholder:hover {
-  transform: scale(1.05) rotate(5deg);
-  box-shadow: 0 12px 32px rgba(14, 165, 233, 0.4),
-              0 0 0 4px var(--bg-elevated),
-              0 0 0 6px rgba(14, 165, 233, 0.3);
-}
-
 .about-card p {
   margin-bottom: var(--space-md);
   max-width: none;
-}
-
-/* Social Links */
-.social-links {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.social-link {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  padding: var(--space-md);
-  background: linear-gradient(135deg, var(--bg-surface), var(--bg-elevated));
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.social-link::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(168, 85, 247, 0.05));
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.social-link:hover {
-  border-color: var(--accent);
-  transform: translateX(4px);
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
-}
-
-.social-link:hover::before {
-  opacity: 1;
-}
-
-.social-icon {
-  font-size: 1.25rem;
-  line-height: 1;
-  position: relative;
-  z-index: 1;
-}
-
-.social-label {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-  position: relative;
-  z-index: 1;
-}
-
-.social-link:hover .social-label {
-  color: var(--text-primary);
 }
 
 .sidebar__link {
@@ -1168,12 +960,6 @@ main {
 
 .category-badge:hover .category-badge__name {
   color: var(--text-primary);
-}
-
-.category-icon {
-  font-size: 0.875rem;
-  position: relative;
-  z-index: 1;
 }
 
 .category-badge__count {
