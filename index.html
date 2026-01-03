@@ -26,34 +26,113 @@
   </header>
 
   <main id="content" class="container">
-    <section class="hero">
-      <h1>Building, breaking, and <span>learning</span> in public</h1>
-      <p>
-        I'm documenting my tech journey as I sharpen my SQL and Python skills,
-        dive into data science and machine learning, and explore Node.js and React.
-        This is where I capture progress, share what I'm building, and reflect on
-        what I'm learning.
-      </p>
-    </section>
-
-    <section class="section">
-      <div class="section__head">
-        <h2>Recent Posts</h2>
-        <a href="posts.html" class="section__link">View all posts</a>
-      </div>
-
-      <div class="post-list">
-        <article class="post-card">
-          <h3>
-            <a href="posts/2026/01-january/2026-01-03-github-pages-first-site.html">My first GitHub Pages site</a>
-          </h3>
-          <p class="post-card__meta">03 Jan 2026 · 4 min read · Shipping</p>
-          <p class="post-card__desc">
-            What I set up, what I misunderstood, and the exact steps that made it click.
+    <div class="page-layout">
+      <div class="page-content">
+        <section class="hero">
+          <h1>Building, breaking, and <span>learning</span> in public</h1>
+          <p>
+            I'm documenting my tech journey as I sharpen my SQL and Python skills,
+            dive into data science and machine learning, and explore Node.js and React.
+            This is where I capture progress, share what I'm building, and reflect on
+            what I'm learning.
           </p>
-        </article>
+        </section>
+
+        <section class="section">
+          <div class="section__head">
+            <h2>Recent Posts</h2>
+            <a href="posts.html" class="section__link">View all posts</a>
+          </div>
+
+          <div class="post-list">
+            <article class="post-card">
+              <h3>
+                <a href="posts/2026/01-january/2026-01-03-github-pages-first-site.html">My first GitHub Pages site</a>
+              </h3>
+              <p class="post-card__meta">03 Jan 2026 · 4 min read · Shipping</p>
+              <p class="post-card__desc">
+                What I set up, what I misunderstood, and the exact steps that made it click.
+              </p>
+            </article>
+          </div>
+        </section>
       </div>
-    </section>
+
+      <!-- Homepage Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar__inner">
+          <!-- About Card -->
+          <div class="sidebar__section">
+            <h2 class="sidebar__title">About</h2>
+            <div class="about-card">
+              <p>Learning SQL, Python, and modern web development. Building projects, documenting progress, and sharing insights along the way.</p>
+              <a href="about.html" class="sidebar__link">More about me →</a>
+            </div>
+          </div>
+
+          <!-- Current Focus -->
+          <div class="sidebar__section">
+            <h2 class="sidebar__title">Current Focus</h2>
+            <div class="focus-list">
+              <div class="focus-item">
+                <span class="focus-icon">🐍</span>
+                <span class="focus-text">Python & Data Science</span>
+              </div>
+              <div class="focus-item">
+                <span class="focus-icon">⚛️</span>
+                <span class="focus-text">React & Node.js</span>
+              </div>
+              <div class="focus-item">
+                <span class="focus-icon">🗄️</span>
+                <span class="focus-text">SQL & Databases</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar__section">
+            <h2 class="sidebar__title">Explore</h2>
+            <div class="category-list">
+              <a href="posts.html" class="category-badge">
+                <span class="category-badge__name">Shipping</span>
+                <span class="category-badge__count">1</span>
+              </a>
+              <a href="posts.html" class="category-badge">
+                <span class="category-badge__name">Learning</span>
+                <span class="category-badge__count">0</span>
+              </a>
+              <a href="posts.html" class="category-badge">
+                <span class="category-badge__name">Building</span>
+                <span class="category-badge__count">0</span>
+              </a>
+              <a href="posts.html" class="category-badge">
+                <span class="category-badge__name">Debugging</span>
+                <span class="category-badge__count">0</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="sidebar__section">
+            <h2 class="sidebar__title">Recent Activity</h2>
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-label">Last post</div>
+                <div class="activity-value">Jan 03, 2026</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-label">Posts this month</div>
+                <div class="activity-value">1</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-label">Total posts</div>
+                <div class="activity-value">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
 
     <footer class="footer">
       <p>© <span id="year"></span> Rich · Built with GitHub Pages</p>

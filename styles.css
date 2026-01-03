@@ -534,6 +534,21 @@ main {
 }
 
 /* =========================================
+   PAGE LAYOUT (Homepage/General Pages)
+   ========================================= */
+.page-layout {
+  display: grid;
+  grid-template-columns: 1fr var(--sidebar-width);
+  gap: var(--space-3xl);
+  max-width: var(--article-layout-width);
+  padding: var(--space-xl) 0 var(--space-3xl);
+}
+
+.page-content {
+  min-width: 0;
+}
+
+/* =========================================
    SIDEBAR
    ========================================= */
 .sidebar {
@@ -637,6 +652,132 @@ main {
   color: var(--accent);
 }
 
+/* About Card */
+.about-card {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.about-card p {
+  margin-bottom: var(--space-md);
+  max-width: none;
+}
+
+.sidebar__link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8125rem;
+  color: var(--accent);
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+
+.sidebar__link:hover {
+  transform: translateX(4px);
+}
+
+/* Focus List */
+.focus-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.focus-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm);
+  background: var(--bg-surface);
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.focus-item:hover {
+  background: var(--bg-elevated);
+}
+
+.focus-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.focus-text {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Category Badges */
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.8125rem;
+  transition: all 0.2s ease;
+}
+
+.category-badge:hover {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+}
+
+.category-badge__name {
+  color: var(--text-secondary);
+}
+
+.category-badge:hover .category-badge__name {
+  color: var(--text-primary);
+}
+
+.category-badge__count {
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* Activity List */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.activity-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.activity-label {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+.activity-value {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
 /* =========================================
    FOOTER
    ========================================= */
@@ -656,7 +797,8 @@ main {
    ========================================= */
 /* Tablet and below - collapse sidebar */
 @media (max-width: 1024px) {
-  .article-layout {
+  .article-layout,
+  .page-layout {
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
   }
@@ -674,6 +816,17 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: var(--space-sm);
+  }
+
+  /* Homepage sidebar on tablet */
+  .page-layout .sidebar__inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .page-layout .sidebar__section {
+    margin-bottom: 0;
   }
 }
 
@@ -698,7 +851,11 @@ main {
   .section__head h2::before { display: none; }
   .post-card { padding: var(--space-md); }
 
-  .article-layout { padding: var(--space-lg) 0 var(--space-2xl); }
+  .article-layout,
+  .page-layout {
+    padding: var(--space-lg) 0 var(--space-2xl);
+  }
+
   .article__header { margin-bottom: var(--space-xl); padding-bottom: var(--space-lg); }
   .article__content pre { padding: var(--space-md); }
 
@@ -708,6 +865,19 @@ main {
 
   .reading-progress {
     height: 2px;
+  }
+
+  /* Homepage sidebar on mobile */
+  .page-layout .sidebar__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .focus-item {
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .category-list {
+    gap: var(--space-xs);
   }
 }
 
