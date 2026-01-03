@@ -390,8 +390,7 @@ main {
   width: calc(100vw - var(--space-md));
   margin-left: calc(-50vw + 50%);
   margin-right: 0;
-  padding: var(--space-xl) 0 var(--space-3xl);
-  padding-right: var(--space-md);
+  padding: var(--space-xl) var(--space-md) var(--space-3xl) var(--space-xl);
 }
 
 .article {
@@ -548,8 +547,7 @@ main {
   width: calc(100vw - var(--space-md));
   margin-left: calc(-50vw + 50%);
   margin-right: 0;
-  padding: var(--space-xl) 0 var(--space-3xl);
-  padding-right: var(--space-md);
+  padding: var(--space-xl) var(--space-md) var(--space-3xl) var(--space-xl);
 }
 
 .page-content {
