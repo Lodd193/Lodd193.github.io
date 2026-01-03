@@ -45,9 +45,6 @@
   --page-width: 1080px;
 }
 
-/* =========================================
-   RESET & BASE
-   ========================================= */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -69,7 +66,6 @@ body {
   min-height: 100vh;
 }
 
-/* Subtle noise texture */
 body::before {
   content: '';
   position: fixed;
@@ -85,9 +81,6 @@ body::before {
   color: var(--bg-deep);
 }
 
-/* =========================================
-   TYPOGRAPHY
-   ========================================= */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   color: var(--text-primary);
@@ -96,21 +89,11 @@ h1, h2, h3, h4 {
   line-height: 1.2;
 }
 
-h1 {
-  font-size: clamp(2rem, 5vw, 2.75rem);
-}
+h1 { font-size: clamp(2rem, 5vw, 2.75rem); }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
 
-h2 {
-  font-size: 1.5rem;
-}
-
-h3 {
-  font-size: 1.25rem;
-}
-
-p {
-  max-width: 65ch;
-}
+p { max-width: 65ch; }
 
 strong {
   color: var(--text-primary);
@@ -131,18 +114,12 @@ code {
   color: var(--accent);
 }
 
-/* =========================================
-   LINKS
-   ========================================= */
 a {
   color: inherit;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-/* =========================================
-   LAYOUT
-   ========================================= */
 .container {
   width: min(var(--page-width), 100% - var(--space-lg) * 2);
   margin-inline: auto;
@@ -167,9 +144,6 @@ a {
   outline-offset: 2px;
 }
 
-/* =========================================
-   HEADER
-   ========================================= */
 .site-header {
   position: sticky;
   top: 0;
@@ -200,9 +174,7 @@ a {
   letter-spacing: -0.02em;
 }
 
-.brand__link:hover {
-  color: var(--accent);
-}
+.brand__link:hover { color: var(--accent); }
 
 .brand__tag {
   font-size: 0.8125rem;
@@ -234,17 +206,11 @@ a {
   background: var(--bg-elevated);
 }
 
-/* =========================================
-   MAIN CONTENT
-   ========================================= */
 main {
   padding-top: var(--space-xl);
   padding-bottom: var(--space-3xl);
 }
 
-/* =========================================
-   HERO
-   ========================================= */
 .hero {
   padding: var(--space-2xl) 0 var(--space-3xl);
   max-width: var(--content-width);
@@ -261,13 +227,8 @@ main {
   background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
 }
 
-.hero h1 {
-  margin-bottom: var(--space-lg);
-}
-
-.hero h1 span {
-  color: var(--accent);
-}
+.hero h1 { margin-bottom: var(--space-lg); }
+.hero h1 span { color: var(--accent); }
 
 .hero > p {
   font-size: 1.125rem;
@@ -282,9 +243,6 @@ main {
   margin-top: var(--space-xl);
 }
 
-/* =========================================
-   PILLS / TAGS
-   ========================================= */
 .pill {
   font-size: 0.75rem;
   font-weight: 500;
@@ -303,12 +261,7 @@ main {
   color: var(--accent);
 }
 
-/* =========================================
-   SECTIONS
-   ========================================= */
-.section {
-  padding: var(--space-2xl) 0;
-}
+.section { padding: var(--space-2xl) 0; }
 
 .section__head {
   display: flex;
@@ -317,9 +270,7 @@ main {
   margin-bottom: var(--space-xl);
 }
 
-.section__head h2 {
-  position: relative;
-}
+.section__head h2 { position: relative; }
 
 .section__head h2::before {
   content: '';
@@ -346,26 +297,15 @@ main {
   transition: transform 0.2s ease;
 }
 
-.section__link:hover {
-  color: var(--accent);
-}
+.section__link:hover { color: var(--accent); }
+.section__link:hover::after { transform: translateX(4px); }
 
-.section__link:hover::after {
-  transform: translateX(4px);
-}
-
-/* =========================================
-   POST LIST
-   ========================================= */
 .post-list {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 }
 
-/* =========================================
-   POST CARD
-   ========================================= */
 .post-card {
   position: relative;
   padding: var(--space-lg);
@@ -395,24 +335,16 @@ main {
   transform: translateY(-2px);
 }
 
-.post-card:hover::before {
-  opacity: 1;
-}
+.post-card:hover::before { opacity: 1; }
 
 .post-card h3 {
   font-size: 1.25rem;
   margin-bottom: var(--space-sm);
 }
 
-.post-card h3 a {
-  color: var(--text-primary);
-}
+.post-card h3 a { color: var(--text-primary); }
+.post-card h3 a:hover { color: var(--accent); }
 
-.post-card h3 a:hover {
-  color: var(--accent);
-}
-
-/* Stretch link to cover entire card */
 .post-card h3 a::after {
   content: '';
   position: absolute;
@@ -443,9 +375,6 @@ main {
   line-height: 1.6;
 }
 
-/* =========================================
-   FOOTER
-   ========================================= */
 .footer {
   margin-top: var(--space-3xl);
   padding-top: var(--space-xl);
@@ -457,13 +386,8 @@ main {
   color: var(--text-tertiary);
 }
 
-/* =========================================
-   RESPONSIVE
-   ========================================= */
 @media (max-width: 640px) {
-  html {
-    font-size: 16px;
-  }
+  html { font-size: 16px; }
   
   .site-header .container {
     flex-direction: column;
@@ -471,13 +395,8 @@ main {
     gap: var(--space-md);
   }
   
-  .brand__tag {
-    display: none;
-  }
-  
-  .hero {
-    padding: var(--space-xl) 0 var(--space-2xl);
-  }
+  .brand__tag { display: none; }
+  .hero { padding: var(--space-xl) 0 var(--space-2xl); }
   
   .section__head {
     flex-direction: column;
@@ -485,26 +404,15 @@ main {
     gap: var(--space-md);
   }
   
-  .section__head h2::before {
-    display: none;
-  }
-  
-  .post-card {
-    padding: var(--space-md);
-  }
+  .section__head h2::before { display: none; }
+  .post-card { padding: var(--space-md); }
 }
 
-/* =========================================
-   FOCUS STATES
-   ========================================= */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
-/* =========================================
-   ANIMATIONS
-   ========================================= */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -521,13 +429,8 @@ main {
   animation: fadeUp 0.6s ease-out both;
 }
 
-.section {
-  animation-delay: 0.1s;
-}
+.section { animation-delay: 0.1s; }
 
-/* =========================================
-   PRINT
-   ========================================= */
 @media print {
   body {
     background: white;
