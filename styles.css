@@ -42,9 +42,9 @@
   
   /* Sizing */
   --content-width: 680px;
-  --sidebar-width: 560px;
-  --page-width: 1200px;
-  --article-layout-width: 1200px;
+  --sidebar-width: 600px;
+  --page-width: 1600px;
+  --article-layout-width: 1600px;
 }
 
 *, *::before, *::after {
@@ -553,7 +553,7 @@ main {
    ========================================= */
 .sidebar {
   position: relative;
-  padding-right: 60px;
+  padding-right: 32px;
   overflow-x: hidden;
 }
 
@@ -709,7 +709,6 @@ main {
 .focus-text {
   font-size: 0.875rem;
   color: var(--text-secondary);
-  padding-right: var(--space-sm);
 }
 
 /* Category Badges */
@@ -780,7 +779,7 @@ main {
   font-size: 0.875rem;
   color: var(--text-primary);
   font-weight: 500;
-  padding-right: var(--space-xl);
+  padding-right: var(--space-sm);
 }
 
 /* =========================================
