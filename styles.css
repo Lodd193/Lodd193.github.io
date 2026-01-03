@@ -42,7 +42,7 @@
   
   /* Sizing */
   --content-width: 680px;
-  --sidebar-width: 500px;
+  --sidebar-width: 560px;
   --page-width: 1200px;
   --article-layout-width: 1200px;
 }
@@ -553,7 +553,7 @@ main {
    ========================================= */
 .sidebar {
   position: relative;
-  padding-right: 80px;
+  padding-right: 60px;
   overflow-x: hidden;
 }
 
