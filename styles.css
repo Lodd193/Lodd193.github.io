@@ -42,7 +42,9 @@
   
   /* Sizing */
   --content-width: 680px;
-  --page-width: 1080px;
+  --sidebar-width: 280px;
+  --page-width: 1200px;
+  --article-layout-width: 1080px;
 }
 
 *, *::before, *::after {
@@ -378,9 +380,19 @@ main {
 /* =========================================
    ARTICLE / POST PAGE STYLES
    ========================================= */
+
+/* Article layout wrapper for two-column */
+.article-layout {
+  display: grid;
+  grid-template-columns: 1fr var(--sidebar-width);
+  gap: var(--space-3xl);
+  max-width: var(--article-layout-width);
+  padding: var(--space-xl) 0 var(--space-3xl);
+}
+
 .article {
   max-width: var(--content-width);
-  padding: var(--space-xl) 0 var(--space-3xl);
+  min-width: 0;
 }
 
 .article__header {
@@ -522,6 +534,110 @@ main {
 }
 
 /* =========================================
+   SIDEBAR
+   ========================================= */
+.sidebar {
+  position: relative;
+}
+
+.sidebar__inner {
+  position: sticky;
+  top: calc(var(--space-2xl) + 60px);
+  max-height: calc(100vh - var(--space-2xl) - 80px);
+  overflow-y: auto;
+}
+
+.sidebar__section {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar__section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.sidebar__title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-md);
+}
+
+/* Table of Contents */
+.toc {
+  list-style: none;
+  padding: 0;
+}
+
+.toc__item {
+  margin-bottom: var(--space-sm);
+}
+
+.toc__link {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  padding: var(--space-xs) 0;
+  padding-left: var(--space-md);
+  border-left: 2px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.toc__link:hover {
+  color: var(--text-primary);
+  border-left-color: var(--accent);
+  padding-left: var(--space-lg);
+}
+
+.toc__link.is-active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  font-weight: 500;
+}
+
+/* Reading Progress */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--bg-elevated);
+  z-index: 999;
+}
+
+.reading-progress__bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #fbbf24);
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+/* Sidebar metadata */
+.post-meta {
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+  line-height: 1.8;
+}
+
+.post-meta__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.post-meta__item::before {
+  content: '•';
+  color: var(--accent);
+}
+
+/* =========================================
    FOOTER
    ========================================= */
 .footer {
@@ -538,30 +654,61 @@ main {
 /* =========================================
    RESPONSIVE
    ========================================= */
+/* Tablet and below - collapse sidebar */
+@media (max-width: 1024px) {
+  .article-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .sidebar {
+    order: -1;
+  }
+
+  .sidebar__inner {
+    position: static;
+    max-height: none;
+  }
+
+  .toc {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--space-sm);
+  }
+}
+
 @media (max-width: 640px) {
   html { font-size: 16px; }
-  
+
   .site-header .container {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-md);
   }
-  
+
   .brand__tag { display: none; }
   .hero { padding: var(--space-xl) 0 var(--space-2xl); }
-  
+
   .section__head {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-md);
   }
-  
+
   .section__head h2::before { display: none; }
   .post-card { padding: var(--space-md); }
-  
-  .article { padding: var(--space-lg) 0 var(--space-2xl); }
+
+  .article-layout { padding: var(--space-lg) 0 var(--space-2xl); }
   .article__header { margin-bottom: var(--space-xl); padding-bottom: var(--space-lg); }
   .article__content pre { padding: var(--space-md); }
+
+  .toc {
+    grid-template-columns: 1fr;
+  }
+
+  .reading-progress {
+    height: 2px;
+  }
 }
 
 :focus-visible {
