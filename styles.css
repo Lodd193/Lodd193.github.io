@@ -42,7 +42,7 @@
   
   /* Sizing */
   --content-width: 680px;
-  --sidebar-width: 380px;
+  --sidebar-width: 440px;
   --page-width: 1200px;
   --article-layout-width: 1200px;
 }
@@ -123,7 +123,7 @@ a {
 }
 
 .container {
-  width: min(var(--page-width), calc(100% - var(--space-lg) * 2));
+  width: min(var(--page-width), calc(100% - var(--space-md) * 2));
   margin-inline: auto;
 }
 
