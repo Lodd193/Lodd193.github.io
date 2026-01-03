@@ -3,98 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My first GitHub Pages site | Rich</title>
-  <meta name="description" content="What I set up, what I misunderstood, and the exact steps that made it click." />
-  <link rel="stylesheet" href="../styles.css" />
+  <title>Rich | Tech Journal</title>
+  <meta name="description" content="Documenting my journey learning SQL, Python, data science, Node.js, and React." />
+  <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
-  
+
   <header class="site-header">
     <div class="container">
       <div class="brand">
-        <a href="../index.html" class="brand__link">Rich</a>
+        <a href="index.html" class="brand__link">Rich</a>
         <span class="brand__tag">Tech Journal</span>
       </div>
       <nav class="nav" aria-label="Main">
-        <a href="../index.html" class="nav__link">Home</a>
-        <a href="../posts.html" class="nav__link is-active">Posts</a>
-        <a href="../about.html" class="nav__link">About</a>
+        <a href="index.html" class="nav__link is-active">Home</a>
+        <a href="posts.html" class="nav__link">Posts</a>
+        <a href="about.html" class="nav__link">About</a>
       </nav>
     </div>
   </header>
-  
+
   <main id="content" class="container">
-    <article class="article">
-      <header class="article__header">
-        <h1>My first GitHub Pages site</h1>
-        <p class="article__meta">03 Jan 2026 · 4 min read · Shipping</p>
-      </header>
-      
-      <p class="article__lead">
-        I wanted a simple option to document my tech journey - honing my SQL and Python DS/ML skills, and learning Node.js & React. GitHub Pages was the best option because it didn't require setup on another platform and made it easy to share my project updates.
+    <section class="hero">
+      <h1>Building, breaking, and <span>learning</span> in public</h1>
+      <p>
+        I'm documenting my tech journey as I sharpen my SQL and Python skills,
+        dive into data science and machine learning, and explore Node.js and React.
+        This is where I capture progress, share what I'm building, and reflect on
+        what I'm learning.
       </p>
-      
-      <div class="article__content">
-        <h2>The context</h2>
-        <p>
-          I've been learning across a few areas at once and I needed somewhere to capture progress properly. Not polished tutorials. Not a stream of half-thoughts. Just short write-ups that I can come back to later.
-        </p>
-        
-        <h2>The problem</h2>
-        <p>
-          The confusing bit wasn't "how to make a website". It was GitHub itself. Repositories, commits, branches, and why a file name like <code>index.html</code> matters. I could feel I was one small detail away from it working, but the details were exactly what I didn't know yet.
-        </p>
-        
-        <h2>The investigation</h2>
-        <ul>
-          <li>I checked what GitHub Pages actually serves by default.</li>
-          <li>I looked at where the Pages settings point to: branch and folder.</li>
-          <li>I verified the files existed in the right place and were named correctly.</li>
-          <li>I refreshed a few times and learnt the hard truth about browser caching.</li>
-        </ul>
-        
-        <h2>The fix</h2>
-        <p>The fix was simple once I stopped guessing and followed the flow:</p>
-        <ol>
-          <li>Create <code>index.html</code> in the repo root.</li>
-          <li>Enable Pages in Settings → Pages and deploy from the main branch root.</li>
-          <li>Add a stylesheet and link it properly.</li>
-        </ol>
-        
-        <p>The key line that made styling work was:</p>
-        <pre><code>&lt;link rel="stylesheet" href="styles.css" /&gt;</code></pre>
-        
-        <h2>What I learned</h2>
-        <ul>
-          <li>GitHub Pages is predictable. It only feels mysterious when you don't know what it expects.</li>
-          <li>File names and locations matter. A missing <code>index.html</code> is enough to make everything look broken.</li>
-          <li>Commits are basically "save points" for your site. Commit equals deploy.</li>
-          <li>If a change doesn't show, it's usually caching or the Pages build still catching up.</li>
-        </ul>
-        
-        <h2>Next time</h2>
-        <ul>
-          <li>I'll add pages deliberately instead of linking to pages that don't exist.</li>
-          <li>I'll keep the structure consistent so writing stays easy.</li>
-          <li>I'll treat the site as a system, not a one-off task.</li>
-        </ul>
-        
-        <h2>Next step</h2>
-        <p>
-          I'm going to publish my next post using the same structure, then improve the Posts page so it lists posts cleanly as the site grows.
-        </p>
-        
-        <a href="../posts.html" class="back-link">Back to Posts</a>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <h2>Recent Posts</h2>
+        <a href="posts.html" class="section__link">View all posts</a>
       </div>
-    </article>
-    
+
+      <div class="post-list">
+        <article class="post-card">
+          <h3>
+            <a href="posts/2026-01-03-github-pages-first-site.html">My first GitHub Pages site</a>
+          </h3>
+          <p class="post-card__meta">03 Jan 2026 · 4 min read · Shipping</p>
+          <p class="post-card__desc">
+            What I set up, what I misunderstood, and the exact steps that made it click.
+          </p>
+        </article>
+      </div>
+    </section>
+
     <footer class="footer">
       <p>© <span id="year"></span> Rich · Built with GitHub Pages</p>
     </footer>
   </main>
-  
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>

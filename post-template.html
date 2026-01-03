@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>POST_TITLE | Rich</title>
+  <meta name="description" content="POST_DESCRIPTION" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <a href="../index.html" class="brand__link">Rich</a>
+        <span class="brand__tag">Tech Journal</span>
+      </div>
+      <nav class="nav" aria-label="Main">
+        <a href="../index.html" class="nav__link">Home</a>
+        <a href="../posts.html" class="nav__link is-active">Posts</a>
+        <a href="../about.html" class="nav__link">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container">
+    <article class="article">
+      <header class="article__header">
+        <h1>POST_TITLE</h1>
+        <p class="article__meta">POST_DATE · POST_READ_TIME min read · POST_CATEGORY</p>
+      </header>
+
+      <p class="article__lead">
+        POST_LEAD_PARAGRAPH
+      </p>
+
+      <div class="article__content">
+        <!-- Your post content goes here -->
+
+        <h2>Section heading</h2>
+        <p>
+          Your content here...
+        </p>
+
+        <a href="../posts.html" class="back-link">Back to Posts</a>
+      </div>
+    </article>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Rich · Built with GitHub Pages</p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
