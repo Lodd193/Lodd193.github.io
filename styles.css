@@ -553,7 +553,8 @@ main {
    ========================================= */
 .sidebar {
   position: relative;
-  padding-right: var(--space-2xl);
+  padding-right: 80px;
+  overflow-x: hidden;
 }
 
 .sidebar__inner {
@@ -561,6 +562,7 @@ main {
   top: calc(var(--space-2xl) + 60px);
   max-height: calc(100vh - var(--space-2xl) - 80px);
   overflow-y: auto;
+  padding-right: var(--space-md);
 }
 
 .sidebar__section {
@@ -778,7 +780,7 @@ main {
   font-size: 0.875rem;
   color: var(--text-primary);
   font-weight: 500;
-  padding-right: var(--space-md);
+  padding-right: var(--space-xl);
 }
 
 /* =========================================
