@@ -177,11 +177,11 @@ a {
 }
 
 .brand__link {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
   color: var(--text-primary);
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   position: relative;
   transition: all 0.3s ease;
   text-shadow: 0 0 20px rgba(14, 165, 233, 0);
@@ -212,7 +212,9 @@ a {
 }
 
 .brand__tag {
+  font-family: var(--font-body);
   font-size: 0.8125rem;
+  font-weight: 400;
   color: var(--text-tertiary);
   padding-left: var(--space-sm);
   border-left: 1px solid var(--border-strong);
@@ -546,10 +548,16 @@ main {
               0 0 30px rgba(14, 165, 233, 0.4),
               0 0 0 1px rgba(255, 255, 255, 0.2) inset;
   animation: none;
+  color: white;
 }
 
 .cta-button:hover::before {
   opacity: 1;
+}
+
+.cta-button:hover > * {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .cta-button:active {
