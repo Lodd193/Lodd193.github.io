@@ -34,12 +34,7 @@ jobs:
 
           if [[ -n $(git status -s) ]]; then
             git add -A
-            git commit -m "Auto-publish scheduled post(s)
-
-Published by GitHub Actions scheduled workflow
-
-🤖 Generated with Claude Code
-Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+            git commit -m "Auto-publish scheduled post(s)" -m "Published by GitHub Actions scheduled workflow"
             git push
             echo "✅ Posts published successfully"
           else
