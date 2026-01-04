@@ -11,7 +11,10 @@
       "Bash(git config:*)",
       "Bash(git push:*)",
       "Bash(git pull:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(cp:*)",
+      "Bash(Tech Journal\" to \"Richard Lodder, MBA, MSc)",
+      "Bash(Data Science/Tech Journey\" across all pages to better represent professional credentials and technical focus.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
     ]
   }
 }
