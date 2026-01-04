@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Building Gym Bestie: A Full-Stack Workout Tracker | Richard Lodder, MBA, MSc</title>
+  <title>Building A Full-Stack Workout Tracker | Richard Lodder, MBA, MSc</title>
   <meta name="description" content="How I built a comprehensive workout tracking app with Next.js, React, TypeScript, and Supabase" />
   <link rel="stylesheet" href="../../../styles.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
@@ -35,7 +35,7 @@
     <div class="article-layout">
       <article class="article" id="content">
         <header class="article__header">
-          <h1>Building Gym Bestie: A Full-Stack Workout Tracker</h1>
+          <h1>Building A Full-Stack Workout Tracker</h1>
           <div class="article__meta">
             <time datetime="2026-01-04">04 January 2026</time>
             <span>•</span>
@@ -52,22 +52,22 @@
         <div class="article__content">
           <h2>Context</h2>
           <p>
-            Like many people trying to stay consistent with fitness, I struggled to track my workouts effectively. I'd used various apps before, but they were either too complicated, lacked the features I wanted, or required premium subscriptions for basic functionality. I wanted something tailored to my needs that could:
+            Like many people trying to stay consistent with fitness, I've struggled to track my workouts effectively to ensure I'm hitting my cardio goals and keeping up with progressive overload in my weightlifting. I'd used various apps before, but they were either too complicated, lacked the features I wanted, or required subscriptions for basic functionality. So I wanted something tailored to my own needs that could:
           </p>
           <ul>
             <li>Log workouts quickly without friction</li>
-            <li>Track progress over time with meaningful visualisations</li>
-            <li>Work offline at the gym where signal is poor</li>
-            <li>Show personal records and celebrate achievements</li>
+            <li>Track progress over time and provide useful visualisations</li>
+            <li>Work offline for those holiday hotel gyms where signal is poor</li>
+            <li>Show my personal records and help me to track achievements</li>
             <li>Provide templates for common workout routines</li>
           </ul>
           <p>
-            More importantly, I wanted to build something real that combined frontend development, backend integration, authentication, and data visualisation—all skills I was developing through my MSc and bootcamp training.
+            More importantly, I wanted to build something real that combined my skills and showcased frontend development, backend integration, authentication, and data visualisation - all skills that I had developed through my MSc and bootcamp training but needed more real-world/hands-on experience with as that is where the bugs and issues are encountered and the real learning begins.
           </p>
 
           <h2>The Problem</h2>
           <p>
-            Building a full-stack application from scratch presented several challenges I hadn't tackled before:
+            Building a full-stack application from scratch presented challenges I hadn't tackled before:
           </p>
           <ul>
             <li><strong>State management complexity:</strong> Managing workout sessions, exercise data, user preferences, and real-time updates across multiple components</li>
@@ -77,24 +77,24 @@
             <li><strong>Progressive Web App setup:</strong> Making it installable and work like a native app across devices</li>
           </ul>
           <p>
-            I also needed to decide on a tech stack that would be modern, scalable, and—critically—something I could actually deploy without managing servers myself.
+            I also needed to decide on a tech stack that would be modern and - something I could actually deploy myself.
           </p>
 
           <h2>Investigation & Planning</h2>
 
           <h3>Technology Choices</h3>
           <p>
-            After researching various options, I settled on a stack that balanced power with developer experience:
+            After researching options, I settled on a stack that balanced power with experience:
           </p>
           <ul>
             <li><strong>Next.js 16 & React 19:</strong> Server-side rendering, excellent developer experience, and built-in API routes</li>
-            <li><strong>TypeScript:</strong> Type safety to catch errors early and improve code quality</li>
+            <li><strong>TypeScript:</strong> Type safety to catch errors early and improve code quality (My TS skills are nowhere near my Python skills currently, this was a steep learning curve)</li>
             <li><strong>Tailwind CSS:</strong> Rapid UI development with utility classes</li>
             <li><strong>Supabase:</strong> PostgreSQL database with built-in authentication, real-time subscriptions, and Row Level Security (RLS)</li>
-            <li><strong>Vercel:</strong> Seamless deployment with automatic HTTPS and global CDN</li>
+            <li><strong>Vercel:</strong> Easy deployment with automatic HTTPS and global CDN</li>
           </ul>
           <p>
-            Supabase was a game-changer—it gave me a PostgreSQL database, authentication, and real-time capabilities without needing to set up my own backend infrastructure.
+            Supabase was a game-changer because it gave me a PostgreSQL database, authentication, and real-time capabilities without requiring me to set up my own backend infrastructure. This likely saved tens of hours of work.
           </p>
 
           <h3>Feature Planning</h3>
@@ -108,6 +108,7 @@
             <li>Progress tracking (personal records, workout history)</li>
             <li>Basic analytics (calendar heat map, streak tracking)</li>
             <li>PWA capabilities (offline support, installable)</li>
+            <li>Repeatability & Progression - ensuring it was super simple to repeat a workout template and receive tailored feedback on what to do to improve on the previous session</li>
           </ol>
 
           <h2>Implementation</h2>
@@ -122,7 +123,7 @@
             <li><code>exercises</code> - Exercise entries within workouts (sets, reps, weight)</li>
           </ul>
           <p>
-            The key insight was using <strong>Row Level Security</strong> (RLS) policies to ensure users could only access their own data. This meant I didn't need complex backend permissions logic—the database enforced isolation automatically.
+            The key insight was to use <strong>Row Level Security</strong> (RLS) policies to ensure users could access only their own data. This meant I didn't need complex backend permissions logic—the database enforced isolation automatically.
           </p>
 
           <h3>Authentication Flow</h3>
@@ -150,7 +151,7 @@
             <li><strong>Personal record indicators:</strong> 🏆 badges automatically appear when a new PR is achieved</li>
           </ul>
           <p>
-            Real-time PR detection was particularly satisfying—I calculate 1RM estimates using the Epley formula and compare against historical data as users log sets.
+            Real-time PR detection was particularly satisfying - I calculate 1RM estimates using the Epley formula and compare against historical data as users log sets.
           </p>
 
           <h3>Analytics & Visualisations</h3>
@@ -164,7 +165,7 @@
             <li><strong>Exercise history:</strong> Per-exercise progress charts showing weight/reps over time</li>
           </ul>
           <p>
-            The heat map was the most complex—I had to aggregate workout data by date, handle different time zones, and render a dynamic grid that responds to the current year and month.
+            The heat map was the most complex—I had to aggregate workout data by date, handle time zone differences, and render a dynamic grid that responds to the current year and month.
           </p>
 
           <h3>Progressive Web App Setup</h3>
@@ -178,7 +179,7 @@
             <li>Optimising for mobile performance</li>
           </ol>
           <p>
-            The offline functionality was crucial—workouts logged without internet are queued locally and automatically sync when connectivity returns. This required careful state management to handle pending uploads and conflict resolution.
+            The offline functionality was crucial as workouts logged without internet are queued locally and automatically sync when connectivity returns. This required state management to handle the pending uploads and conflict resolution.
           </p>
 
           <h3>Templates System</h3>
@@ -191,7 +192,7 @@
             <li><strong>One-click loading:</strong> Templates populate the logging interface instantly</li>
           </ul>
           <p>
-            This was a huge time-saver for recurring workouts—no more manually selecting the same exercises every session.
+            This was a huge time-saver for recurring workouts - no more manually selecting the same exercises every session and I ensured these were saved on SupaBase rather than Local Storage to ensure they would be available on any device.
           </p>
 
           <h2>Challenges & Solutions</h2>
@@ -201,7 +202,7 @@
             TypeScript was new to me, and I initially struggled with complex type definitions, especially around Supabase query responses and React component props.
           </p>
           <p>
-            <strong>Solution:</strong> I learned to use TypeScript's utility types (<code>Partial</code>, <code>Pick</code>, <code>Omit</code>) and created shared interface definitions in a <code>types</code> directory. The investment paid off—type errors caught bugs before runtime.
+            <strong>Solution:</strong> I learned to use TypeScript's utility types (<code>Partial</code>, <code>Pick</code>, <code>Omit</code>) and created shared interface definitions in a <code>types</code> directory. The investment paid off, and type errors caught bugs before runtime. Coming from Python, this was a steep learning curve.
           </p>
 
           <h3>Challenge 2: Real-Time Updates</h3>
@@ -209,7 +210,7 @@
             Getting Supabase real-time subscriptions to work reliably was tricky, especially managing subscription cleanup to prevent memory leaks.
           </p>
           <p>
-            <strong>Solution:</strong> I used React's <code>useEffect</code> cleanup functions properly and ensured subscriptions were tied to component lifecycle. I also added manual refresh buttons as a fallback.
+            <strong>Solution:</strong> I used React's <code>useEffect</code> cleanup functions properly and ensured subscriptions were tied to the component lifecycle. I also added manual refresh buttons as a fallback.
           </p>
 
           <h3>Challenge 3: Mobile Performance</h3>
@@ -217,7 +218,7 @@
             Initial load times on mobile were slower than I wanted, especially with the exercise library.
           </p>
           <p>
-            <strong>Solution:</strong> I implemented code splitting, lazy-loaded heavy components, and moved the exercise library to a static JSON file rather than querying the database every time. This reduced initial bundle size significantly.
+            <strong>Solution:</strong> I implemented code splitting, lazy-loaded heavy components, and moved the exercise library to a static JSON file rather than querying the database every time. This reduced the initial bundle size significantly.
           </p>
 
           <h2>What I Learned</h2>
@@ -234,20 +235,20 @@
 
           <h3>Product & UX Insights</h3>
           <ul>
-            <li><strong>Friction matters:</strong> Every extra tap or screen reduces usage. The logging flow needed to be ruthlessly optimised.</li>
-            <li><strong>Visual feedback is motivating:</strong> The PR badges and streak tracking created genuine excitement.</li>
-            <li><strong>Offline support is non-negotiable:</strong> Gyms have terrible signal. An app that doesn't work offline is useless in this context.</li>
-            <li><strong>Templates save time:</strong> Users don't want to think about what to log—they want to start lifting.</li>
+            <li><strong>Friction matters:</strong> Every extra tap or screen reduces usage. The logging flow needed to be seriously optimised.</li>
+            <li><strong>Visual feedback is motivating:</strong> The PR badges and streak tracking were fulfilling.</li>
+            <li><strong>Offline support is non-negotiable:</strong> An app that doesn't work offline would be useless in this context.</li>
+            <li><strong>Templates save time:</strong> Users don't want to think about what to log - they want to start lifting and know the sets/reps/weight to use for progressive overload.</li>
           </ul>
 
           <h3>Workflow Improvements</h3>
           <p>
-            This was my first project using a component-driven development approach. Breaking the UI into small, reusable components made debugging easier and sped up feature development. I also learned the value of testing authentication flows thoroughly—auth bugs are the worst kind of bugs.
+            This was my first project using a component-driven dev approach. Breaking the UI into small, reusable components made debugging easier and sped up feature development. I also learned the value of thoroughly testing authentication flows - auth bugs are a nightmare and sapped many hours of my time.
           </p>
 
           <h2>Results</h2>
           <p>
-            Gym Bestie is now live and deployed. The app successfully:
+            Gym Bestie (name tbc) is now live and deployed. The app successfully:
           </p>
           <ul>
             <li>✅ Works offline with automatic sync</li>
@@ -258,7 +259,7 @@
             <li>✅ Secures user data with RLS and authentication</li>
           </ul>
           <p>
-            More importantly, I use it myself every workout. It's proven that I can take a project from idea to production deployment, which was a major confidence boost.
+            More importantly, I use it myself every workout. It's proven that I can take a project from idea to production deployment, which was a major confidence boost as everyone in the tech world seems to be a super-expert with many years of experience doing everything, or at least that's how I perceived it.
           </p>
 
           <h2>Next Steps</h2>
@@ -274,16 +275,16 @@
             <li><strong>Mobile app:</strong> Native iOS/Android apps using React Native</li>
           </ul>
           <p>
-            The codebase is also a great foundation for future full-stack projects. I've learned patterns I can reuse, and I'm much more confident with TypeScript, Next.js, and Supabase.
+            The codebase is also a useful foundation for future full-stack projects. I've learned patterns I can reuse, and I'm much more confident with TypeScript, Next.js, and Supabase (I didn't even know Supabase existed before this project!)
           </p>
 
           <h2>Key Takeaways</h2>
           <ol>
-            <li><strong>Start with MVP:</strong> I could have added dozens more features initially, but shipping something usable first was the right call.</li>
-            <li><strong>TypeScript is worth it:</strong> The learning curve was steep, but type safety caught so many bugs.</li>
+            <li><strong>Start with MVP:</strong> I could have added dozens more features initially, but creating something usable first was the right call - iterative improvements are the way to go. Map out your ideas - the 1) What, 2) Why, 3) How, 4) When, before you write any code. An project plan template is free to use on the Resources page</li>
+            <li><strong>TypeScript is worth it:</strong> The learning curve was steep, but type safety caught so many bugs, and it's a very in-demand skill right now.</li>
             <li><strong>Supabase accelerates development:</strong> Not having to build authentication and database infrastructure saved weeks.</li>
             <li><strong>Real projects teach more than tutorials:</strong> Hitting unexpected problems and solving them built real skills.</li>
-            <li><strong>Deploy early, iterate often:</strong> Getting it live—even imperfect—forced me to polish rough edges.</li>
+            <li><strong>Deploy early, iterate often:</strong> Getting it live - even imperfect - forced me to polish rough edges.</li>
           </ol>
 
           <p>
