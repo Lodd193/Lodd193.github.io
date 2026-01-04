@@ -111,12 +111,31 @@
     </section>
 
     <footer class="footer">
-      <p>© <span id="year"></span> Richard Lodder, MBA, MSc · Built with GitHub Pages</p>
+      <p>© <span id="year"></span> Richard Lodder, MBA, MSc · Built with GitHub Pages · <span id="visitor-count">Loading visitors...</span></p>
     </footer>
   </main>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Visitor counter using hits.sh
+    const visitorCountElement = document.getElementById("visitor-count");
+    const pageUrl = 'lodd193.github.io/posts';
+
+    fetch(`https://hits.sh/${pageUrl}.svg?style=flat&label=visitors&color=gray`)
+      .then(response => response.text())
+      .then(svg => {
+        // Extract count from SVG
+        const match = svg.match(/visitors<\/text><text[^>]*>(\d+)/);
+        if (match && match[1]) {
+          visitorCountElement.textContent = `${match[1]} visitors`;
+        } else {
+          visitorCountElement.textContent = '';
+        }
+      })
+      .catch(() => {
+        visitorCountElement.textContent = '';
+      });
   </script>
 </body>
 </html>
