@@ -46,26 +46,26 @@
         </header>
 
         <p class="article__lead">
-          GitHub has a lot of 'hidden' features, it's so much more than just a place to store code. While building my workout tracker, I learned how powerful GitHub's project management and DevOps features are. Here's what worked, what I struggled with, and what I'd do differently next time.
+          GitHub has a lot of 'hidden' features, it's way more than what I first thought it was - a place to stash my code. While building my workout tracker, I looked into these features a lot and discovered DevOps! I quickly learned how powerful GitHub's project management and DevOps features are. Here's what worked, what I made a huge mess of, and what I'd do differently next time.
         </p>
 
         <div class="article__content">
           <h2>Why GitHub for Project Management?</h2>
           <p>
-            When I started the workout tracker project, I knew I needed version control - I constantly made iterative changes/improvements as I tested my app at the gym. What I didn't realise was how much GitHub could help me stay organised, track progress, and maintain the quality of my code throughout development.
+            When I started the workout tracker project, I knew I needed version control - I constantly made small iterative changes/improvements based on my own feedback from testing my app at the gym. What I didn't realise was how much GitHub could help me stay organised, track progress, and maintain the quality of my code throughout development.
           </p>
           <p>
-            Coming from a business background with my MBA, I am very familiar with project management principles, but applying them to software development was new to me GitHub's tools really helped to bridged that gap.
+            Coming from a business background with my MBA, I am very familiar with project management principles, but applying them to software development was new to me GitHub's tools really helped to bridge that gap.
           </p>
 
           <h2>Version Control: The Foundation</h2>
 
           <h3>Commits as Documentation</h3>
           <p>
-            Early on, I made the mistake of writing vague commit messages like "fixed stuff" or "updates". This came back to haunt me when I needed to track down when a bug was introduced.
+            Early on, I made the mistake of writing vague commit messages like "fixed stuff" or "updates". This came back to haunt me when I needed to track down when a bug was introduced - similar to my early Python days when I didn't comment on my code and when I created monolithic blocks of code which I couldn't understand when I revisited them weeks or months later.
           </p>
           <p>
-            I learned to write very descriptive commit messages that explain the "why", not just the "what":
+            I learned to write super descriptive commit messages that explain the "why", not just the "what":
           </p>
           <ul>
             <li><strong>Before:</strong> "update auth"</li>
@@ -86,12 +86,12 @@
             <li><code>fix/*</code> - Bug fixes (e.g., <code>fix/pr-calculation</code>)</li>
           </ul>
           <p>
-            This kept my main branch stable and allowed me to experiment with new features without breaking working code. When a feature was ready, I'd merge it to <code>dev</code> for testing, then to <code>main</code> for deployment.
+            This kept my main branch stable and allowed me to experiment with new features without breaking my working code (I used to break my working code constantly - honestly, version control is a life saver and something I wish I had learnt on day 1 of my data science journey). When a feature was ready, I'd merge it to <code>dev</code> for testing, then to <code>main</code> for deployment.
           </p>
 
           <h2>Pull Requests: Code Review for Solo Developers</h2>
           <p>
-            Even though I was working solo, I still used pull requests. This might seem excessive, but it forced me to:
+            Even though I was working solo, I still used pull requests. This might seem excessive, but it helped me learn and feel comfortable using these commands and it forced me to:
           </p>
           <ol>
             <li>Review my own code with fresh eyes before merging</li>
@@ -100,7 +100,7 @@
             <li>Catch bugs I'd missed during development</li>
           </ol>
           <p>
-            The act of writing a PR description made me think critically about whether my implementation was actually solving the problem correctly.
+            The act of writing a PR description made me think critically about whether my implementation was actually solving the problem correctly (the MBA came into play here).
           </p>
 
           <h2>Issues: Tracking Features and Bugs</h2>
@@ -129,12 +129,12 @@
             <li><strong>Done:</strong> Completed and merged work</li>
           </ul>
           <p>
-            Dragging cards across the board gave me a visual sense of progress and helped me avoid taking on too many tasks at once. It also made it easy to see what I'd accomplished over time, which was motivating.
+            Dragging cards across the board gave me a visual sense of progress and helped me avoid taking on too many tasks at once, something I used to do a lot. It also made it easy to see what I'd accomplished over time, which helped me stay motivated.
           </p>
 
           <h2>GitHub Actions: Automated Workflows</h2>
           <p>
-            This is where things got really interesting. I set up GitHub Actions to automate repetitive tasks:
+            This is where things got really interesting. I began learning about GitHub Actions and using it to automate repetitive tasks:
           </p>
 
           <h3>Continuous Integration</h3>
@@ -147,12 +147,12 @@
             <li>Tests (all passing)</li>
           </ul>
           <p>
-            This caught errors before they reached production and gave me confidence that my code was solid - I can't begin to tell you how much of a game changer this is!
+            This caught errors before they reached production and gave me confidence that my code was solid - I can't begin to tell you how much of a game-changer this is! Everyone who is setting out on their coding journey should learn this asap - it'll change your life.
           </p>
 
           <h3>Automated Deployments</h3>
           <p>
-            I connected my GitHub repository to Vercel for automatic deployments. Every commit to <code>main</code> triggered a production deploy, and every PR created a preview deployment with a unique URL.
+            I also connected my GitHub repository to Vercel for automatic deployments. Every commit to <code>main</code> triggered a production deploy, and every PR created a preview deployment with a unique URL.
           </p>
           <p>
             This was game-changing - I could test features in a production-like environment before merging, and I always knew the live site matched what was in my <code>main</code> branch.
@@ -160,24 +160,24 @@
 
           <h2>What I Learned</h2>
 
-          <h3>Git Hygiene Matters</h3>
+          <h3>Git Tidyness Matters</h3>
           <p>
-            Small, focused commits are easier to understand and revert if needed. Large commits that change 20 files across multiple features are a nightmare to debug later.
+            Small, focused commits are easier to understand and revert if needed. Large commits that change 20 files across multiple features are a pain in the @$$ to debug later - just don't do it, work iteratively, it's what GitHub excels at!
           </p>
 
           <h3>Documentation Through Process</h3>
           <p>
-            Good commit messages, PR descriptions, and issue tracking created automatic documentation of my decision-making process. When I returned to the project after a break, I could quickly get back up to speed.
+            Good commit messages, PR descriptions, and issue tracking created automatic documentation of my decision-making process. When I returned to the project after a break, I could quickly get back up to speed, and, crucially, if I were to collaborate with anyone, they could pick up where I left off. Imagine working with someone in a different timezone, you go to bed, and they wake up. The project you're working on starts seeing progress over a much longer window - the possibilities are endless.
           </p>
 
           <h3>Automation Saves Time</h3>
           <p>
-            Setting up GitHub Actions took a few hours, but it saved me countless hours of manual testing and deployment. The initial investment paid off immediately.
+            Setting up GitHub Actions took a few hours and mainly consisted of watching YouTube videos ("Techworld with Nana" was super helpful). Still, it saved me countless hours of manual testing and deployment. The initial investment paid off right away
           </p>
 
           <h3>Solo Doesn't Mean Sloppy</h3>
           <p>
-            Using professional workflows (branches, PRs, code review) even as a solo developer prepared me for collaborative work and kept my codebase maintainable.
+            Using professional workflows (branches, PRs, code review), even as a solo developer, prepared me for collaborative work and kept my codebase maintainable.
           </p>
 
           <h2>What I'd Do Differently</h2>
