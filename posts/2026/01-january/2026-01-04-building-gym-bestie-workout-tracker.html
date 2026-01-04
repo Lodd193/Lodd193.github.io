@@ -65,6 +65,11 @@
             More importantly, I wanted to build something real that combined my skills and showcased frontend development, backend integration, authentication, and data visualisation - all skills that I had developed through my MSc and bootcamp training but needed more real-world/hands-on experience with as that is where the bugs and issues are encountered and the real learning begins.
           </p>
 
+          <figure class="single-image">
+            <img src="../../../images/Front page.PNG" alt="Gym Bestie front page showing workout dashboard with recent activity and quick actions" loading="lazy">
+            <figcaption>The main dashboard showing workout history and quick action buttons</figcaption>
+          </figure>
+
           <h2>The Problem</h2>
           <p>
             Building a full-stack application from scratch presented challenges I hadn't tackled before:
@@ -140,6 +145,11 @@
             The middleware pattern in Next.js 16 made route protection elegant—any route under <code>/dashboard</code> automatically requires authentication.
           </p>
 
+          <figure class="single-image">
+            <img src="../../../images/Login screen.png" alt="Gym Bestie login screen with email and password authentication" loading="lazy">
+            <figcaption>Clean authentication interface powered by Supabase Auth</figcaption>
+          </figure>
+
           <h3>Workout Logging Interface</h3>
           <p>
             The logging interface needed to be fast and intuitive. I built it with:
@@ -154,6 +164,17 @@
             Real-time PR detection was particularly satisfying - I calculate 1RM estimates using the Epley formula and compare against historical data as users log sets.
           </p>
 
+          <div class="image-grid">
+            <figure>
+              <img src="../../../images/Workout progressive overload.jpg" alt="Workout logging interface showing exercise sets with progressive overload tracking" loading="lazy">
+              <figcaption>Logging sets with automatic progressive overload recommendations</figcaption>
+            </figure>
+            <figure>
+              <img src="../../../images/Progressive overload guidance.jpg" alt="Progressive overload guidance showing recommended weight increases" loading="lazy">
+              <figcaption>Smart guidance for progressive overload based on performance</figcaption>
+            </figure>
+          </div>
+
           <h3>Analytics & Visualisations</h3>
           <p>
             I implemented several analytics features to keep users motivated:
@@ -167,6 +188,37 @@
           <p>
             The heat map was the most complex—I had to aggregate workout data by date, handle time zone differences, and render a dynamic grid that responds to the current year and month.
           </p>
+
+          <div class="image-grid">
+            <figure>
+              <img src="../../../images/Your Progress .jpg" alt="Progress overview dashboard showing workout statistics and achievements" loading="lazy">
+              <figcaption>Comprehensive progress dashboard with key metrics</figcaption>
+            </figure>
+            <figure>
+              <img src="../../../images/Personalised weight goals.jpg" alt="Personalised weight goals interface for tracking lifting targets" loading="lazy">
+              <figcaption>Set and track personalised weight goals for each exercise</figcaption>
+            </figure>
+            <figure>
+              <img src="../../../images/Week on week progression.jpg" alt="Week-on-week progression chart showing training volume trends" loading="lazy">
+              <figcaption>Week-on-week progression tracking for consistent improvement</figcaption>
+            </figure>
+            <figure>
+              <img src="../../../images/Volume trends.jpg" alt="Volume trends chart showing total training volume over time" loading="lazy">
+              <figcaption>Training volume trends to monitor overall workload</figcaption>
+            </figure>
+            <figure>
+              <img src="../../../images/Exercise specific weight progression.jpg" alt="Exercise-specific weight progression graph" loading="lazy">
+              <figcaption>Track weight progression for individual exercises</figcaption>
+            </figure>
+            <figure>
+              <img src="../../../images/Cardio tracker.jpg" alt="Cardio tracking interface with distance, duration, and calories" loading="lazy">
+              <figcaption>Dedicated cardio tracking with comprehensive metrics</figcaption>
+            </figure>
+            <figure>
+              <img src="../../../images/Achievements and daily log.jpg" alt="Achievements section showing earned badges and daily workout log" loading="lazy">
+              <figcaption>Achievement system and daily workout history</figcaption>
+            </figure>
+          </div>
 
           <h3>Progressive Web App Setup</h3>
           <p>
@@ -194,6 +246,11 @@
           <p>
             This was a huge time-saver for recurring workouts - no more manually selecting the same exercises every session and I ensured these were saved on SupaBase rather than Local Storage to ensure they would be available on any device.
           </p>
+
+          <figure class="single-image">
+            <img src="../../../images/Workout templates.PNG" alt="Workout templates selection screen showing PPL, Upper/Lower, and custom templates" loading="lazy">
+            <figcaption>Pre-built workout templates for quick session starts</figcaption>
+          </figure>
 
           <h2>Challenges & Solutions</h2>
 
