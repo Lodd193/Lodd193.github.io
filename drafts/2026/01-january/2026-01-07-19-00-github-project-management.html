@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Managing Projects with GitHub: Lessons from Building a Workout Tracker | Richard Lodder, MBA, MSc</title>
+  <meta name="description" content="How I used GitHub for version control, collaboration, and DevOps workflows while building a full-stack application" />
+  <link rel="stylesheet" href="../../../styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <a href="../../../index.html" class="brand__link">Richard Lodder, MBA, MSc</a>
+        <span class="brand__tag">Data Science/Tech Journey</span>
+      </div>
+      <nav class="nav" aria-label="Main">
+        <a href="../../../index.html" class="nav__link">Home</a>
+        <a href="../../../posts.html" class="nav__link is-active">Posts</a>
+        <a href="../../../about.html" class="nav__link">About</a>
+        <a href="../../../resources.html" class="nav__link">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress">
+    <div class="reading-progress__bar" id="progress-bar"></div>
+  </div>
+
+  <main class="container">
+    <div class="article-layout">
+      <article class="article" id="content">
+        <header class="article__header">
+          <h1>Managing Projects with GitHub: Lessons from Building a Workout Tracker</h1>
+          <div class="article__meta">
+            <time datetime="2026-01-07">07 Jan 2026</time>
+            <span>•</span>
+            <span>5 min read</span>
+            <span>•</span>
+            <span>📚 Learning</span>
+          </div>
+        </header>
+
+        <p class="article__lead">
+          GitHub is more than just a place to store code. While building my workout tracker, I learned how powerful GitHub's project management and DevOps features really are. Here's what worked, what I struggled with, and what I'd do differently next time.
+        </p>
+
+        <div class="article__content">
+          <h2>Why GitHub for Project Management?</h2>
+          <p>
+            When I started the workout tracker project, I knew I needed version control. What I didn't realise was how much GitHub could help me stay organised, track progress, and maintain code quality throughout development.
+          </p>
+          <p>
+            Coming from a business background with my MBA, I was familiar with project management principles, but applying them to software development was different. GitHub's tools bridged that gap.
+          </p>
+
+          <h2>Version Control: The Foundation</h2>
+
+          <h3>Commits as Documentation</h3>
+          <p>
+            Early on, I made the mistake of writing vague commit messages like "fixed stuff" or "updates". This came back to haunt me when I needed to track down when a bug was introduced.
+          </p>
+          <p>
+            I learned to write descriptive commit messages that explain the "why", not just the "what":
+          </p>
+          <ul>
+            <li><strong>Before:</strong> "update auth"</li>
+            <li><strong>After:</strong> "Add email confirmation to prevent spam signups"</li>
+          </ul>
+          <p>
+            This discipline made it much easier to understand my project's history and debug issues weeks later.
+          </p>
+
+          <h3>Branching Strategy</h3>
+          <p>
+            I adopted a simple branching strategy:
+          </p>
+          <ul>
+            <li><code>main</code> - Production-ready code only</li>
+            <li><code>dev</code> - Integration branch for features</li>
+            <li><code>feature/*</code> - Individual features (e.g., <code>feature/workout-templates</code>)</li>
+            <li><code>fix/*</code> - Bug fixes (e.g., <code>fix/pr-calculation</code>)</li>
+          </ul>
+          <p>
+            This kept my main branch stable and allowed me to experiment with new features without breaking working code. When a feature was ready, I'd merge it to <code>dev</code> for testing, then to <code>main</code> for deployment.
+          </p>
+
+          <h2>Pull Requests: Code Review for Solo Developers</h2>
+          <p>
+            Even though I was working solo, I still used pull requests. This might seem excessive, but it forced me to:
+          </p>
+          <ol>
+            <li>Review my own code with fresh eyes before merging</li>
+            <li>Write a summary of what changed and why</li>
+            <li>Check that tests still passed</li>
+            <li>Catch bugs I'd missed during development</li>
+          </ol>
+          <p>
+            The act of writing a PR description made me think critically about whether my implementation was actually solving the problem correctly.
+          </p>
+
+          <h2>Issues: Tracking Features and Bugs</h2>
+          <p>
+            I used GitHub Issues as my personal backlog:
+          </p>
+          <ul>
+            <li><strong>Feature requests:</strong> "Add workout templates for common routines"</li>
+            <li><strong>Bugs:</strong> "Personal records not calculating for cardio exercises"</li>
+            <li><strong>Enhancements:</strong> "Improve mobile performance on exercise selection"</li>
+          </ul>
+          <p>
+            I labelled issues by type (bug, enhancement, feature) and priority (high, medium, low). This helped me focus on what mattered most and avoid scope creep.
+          </p>
+          <p>
+            When I fixed an issue, I'd reference it in my commit message (<code>Fixes #12</code>), which automatically closed the issue and created a link between the commit and the problem it solved.
+          </p>
+
+          <h2>GitHub Projects: Visual Progress Tracking</h2>
+          <p>
+            I created a GitHub Project board with three columns:
+          </p>
+          <ul>
+            <li><strong>To Do:</strong> Features and fixes I planned to work on</li>
+            <li><strong>In Progress:</strong> What I was actively developing</li>
+            <li><strong>Done:</strong> Completed and merged work</li>
+          </ul>
+          <p>
+            Dragging cards across the board gave me a visual sense of progress and helped me avoid taking on too many tasks at once. It also made it easy to see what I'd accomplished over time, which was motivating.
+          </p>
+
+          <h2>GitHub Actions: Automated Workflows</h2>
+          <p>
+            This is where things got really interesting. I set up GitHub Actions to automate repetitive tasks:
+          </p>
+
+          <h3>Continuous Integration</h3>
+          <p>
+            I created a workflow that ran on every push to check:
+          </p>
+          <ul>
+            <li>TypeScript compilation (no type errors)</li>
+            <li>Linting (code style consistency)</li>
+            <li>Tests (all passing)</li>
+          </ul>
+          <p>
+            This caught errors before they made it to production and gave me confidence that my code was solid.
+          </p>
+
+          <h3>Automated Deployments</h3>
+          <p>
+            I connected my GitHub repository to Vercel for automatic deployments. Every commit to <code>main</code> triggered a production deploy, and every PR created a preview deployment with a unique URL.
+          </p>
+          <p>
+            This was game-changing - I could test features in a production-like environment before merging, and I always knew the live site matched what was in my <code>main</code> branch.
+          </p>
+
+          <h2>What I Learned</h2>
+
+          <h3>Git Hygiene Matters</h3>
+          <p>
+            Small, focused commits are easier to understand and revert if needed. Large commits that change 20 files across multiple features are a nightmare to debug later.
+          </p>
+
+          <h3>Documentation Through Process</h3>
+          <p>
+            Good commit messages, PR descriptions, and issue tracking created automatic documentation of my decision-making process. When I returned to the project after a break, I could quickly get back up to speed.
+          </p>
+
+          <h3>Automation Saves Time</h3>
+          <p>
+            Setting up GitHub Actions took a few hours, but it saved me countless hours of manual testing and deployment. The initial investment paid off immediately.
+          </p>
+
+          <h3>Solo Doesn't Mean Sloppy</h3>
+          <p>
+            Using professional workflows (branches, PRs, code review) even as a solo developer prepared me for collaborative work and kept my codebase maintainable.
+          </p>
+
+          <h2>What I'd Do Differently</h2>
+          <ul>
+            <li><strong>Start with issues earlier:</strong> I wrote a lot of code before creating issues to track it. Starting with issues would have helped me plan better.</li>
+            <li><strong>Use templates:</strong> GitHub lets you create templates for issues and PRs. This would have saved time and ensured consistency.</li>
+            <li><strong>Set up branch protection:</strong> I could have required PR reviews (even self-reviews) and passing tests before merging to <code>main</code>.</li>
+            <li><strong>Tag releases:</strong> I should have used Git tags to mark significant versions (v1.0, v1.1, etc.) for easier rollback if needed.</li>
+          </ul>
+
+          <h2>Tools I Used</h2>
+          <ul>
+            <li><strong>Git CLI:</strong> For commits, branches, and merges</li>
+            <li><strong>GitHub Web UI:</strong> For PRs, issues, and project boards</li>
+            <li><strong>GitHub Desktop:</strong> Occasionally, for visualising complex merge conflicts</li>
+            <li><strong>VS Code Git integration:</strong> For quick staging and committing during development</li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+          <ol>
+            <li><strong>Version control is more than backup:</strong> It's a complete project management system when used properly.</li>
+            <li><strong>Process scales:</strong> Good habits on solo projects translate directly to team environments.</li>
+            <li><strong>Automation is powerful:</strong> GitHub Actions can handle testing, deployment, and more - freeing you to focus on building.</li>
+            <li><strong>Documentation happens naturally:</strong> When you commit, review, and track issues properly, you're creating project documentation without extra effort.</li>
+          </ol>
+
+          <p>
+            GitHub transformed from "just a code host" into my complete DevOps platform. Whether you're building a personal project or working on a team, these workflows will keep you organised and productive.
+          </p>
+
+          <p>
+            If you're new to GitHub project management, start simple: write better commit messages, create a few issues, and try using a project board. You'll be surprised how much clearer your development process becomes.
+          </p>
+        </div>
+
+        <a href="../../../posts.html" class="back-link">Back to Posts</a>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar__inner">
+          <!-- Table of Contents -->
+          <div class="sidebar__section">
+            <h2 class="sidebar__title">On This Page</h2>
+            <nav class="toc">
+              <ul>
+                <li class="toc__item"><a href="#content" class="toc__link">Why GitHub for Project Management?</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Version Control: The Foundation</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Pull Requests</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Issues</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">GitHub Projects</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">GitHub Actions</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">What I Learned</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">What I'd Do Differently</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Key Takeaways</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <!-- Post Meta -->
+          <div class="sidebar__section">
+            <h2 class="sidebar__title">Post Details</h2>
+            <div class="post-meta">
+              <div class="post-meta__item">Published 07 Jan 2026</div>
+              <div class="post-meta__item">5 minute read</div>
+              <div class="post-meta__item">Category: Learning</div>
+              <div class="post-meta__item">Tags: GitHub, DevOps, Project Management, Git</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Richard Lodder, MBA, MSc · Built with GitHub Pages</p>
+    </footer>
+  </main>
+
+  <script>
+    // Update year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const article = document.querySelector('.article__content');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (article && progressBar) {
+        const articleTop = article.offsetTop;
+        const articleHeight = article.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+
+        const progress = ((scrollY - articleTop + windowHeight) / articleHeight) * 100;
+        const boundedProgress = Math.min(Math.max(progress, 0), 100);
+
+        progressBar.style.width = boundedProgress + '%';
+      }
+    });
+  </script>
+</body>
+</html>
