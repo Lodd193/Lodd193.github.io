@@ -1649,10 +1649,6 @@ main {
   .page-layout {
     grid-template-columns: 1fr;
     gap: var(--space-2xl);
-    width: 100%;
-    margin-left: 0;
-    padding-left: var(--space-lg);
-    padding-right: var(--space-lg);
   }
 
   .sidebar {
@@ -1685,73 +1681,14 @@ main {
 @media (max-width: 640px) {
   html { font-size: 16px; }
 
-  /* Prevent horizontal scroll */
-  body {
-    overflow-x: hidden;
-  }
-
-  .container {
-    width: 100%;
-    padding-left: var(--space-md);
-    padding-right: var(--space-md);
-  }
-
-  /* Improved touch targets for navigation */
-  .site-header {
-    padding: var(--space-sm) 0;
-  }
-
   .site-header .container {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-md);
   }
 
-  .nav {
-    width: 100%;
-    gap: var(--space-xs);
-  }
-
-  .nav__link {
-    flex: 1;
-    text-align: center;
-    padding: var(--space-md);
-    font-size: 0.9375rem;
-  }
-
   .brand__tag { display: none; }
-
-  .hero {
-    padding: var(--space-xl) 0 var(--space-2xl);
-    max-width: 100%;
-  }
-
-  .hero h1 {
-    font-size: 1.75rem;
-    line-height: 1.3;
-  }
-
-  .hero h2 {
-    font-size: 1.125rem;
-  }
-
-  .hero > p {
-    font-size: 1rem;
-  }
-
-  /* Better touch targets for tech pills */
-  .tech-stack {
-    gap: var(--space-sm);
-  }
-
-  .tech-pill {
-    padding: 10px 16px;
-    font-size: 0.875rem;
-  }
-
-  .section {
-    padding: var(--space-xl) 0;
-  }
+  .hero { padding: var(--space-xl) 0 var(--space-2xl); }
 
   .section__head {
     flex-direction: column;
@@ -1760,48 +1697,15 @@ main {
   }
 
   .section__head h2::before { display: none; }
+  .post-card { padding: var(--space-md); }
 
-  .post-card {
-    padding: var(--space-md);
-  }
-
-  .post-card__meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-xs);
-  }
-
-  /* Better CTA button sizing for touch */
-  .cta-button {
-    padding: 12px 24px;
-    font-size: 0.9375rem;
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Fix layout overflow */
   .article-layout,
   .page-layout {
-    width: 100%;
-    margin-left: 0;
-    padding: var(--space-md) var(--space-md) var(--space-2xl);
+    padding: var(--space-lg) 0 var(--space-2xl);
   }
 
-  .article__header {
-    margin-bottom: var(--space-xl);
-    padding-bottom: var(--space-lg);
-  }
-
-  .article__content pre {
-    padding: var(--space-md);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .article__content {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-  }
+  .article__header { margin-bottom: var(--space-xl); padding-bottom: var(--space-lg); }
+  .article__content pre { padding: var(--space-md); }
 
   .toc {
     grid-template-columns: 1fr;
@@ -1817,20 +1721,11 @@ main {
   }
 
   .focus-item {
-    padding: var(--space-md);
+    padding: var(--space-xs) var(--space-sm);
   }
 
   .category-list {
     gap: var(--space-xs);
-  }
-
-  .category-badge {
-    padding: var(--space-sm) var(--space-md);
-  }
-
-  /* Social links better touch targets */
-  .social-link {
-    padding: var(--space-md) var(--space-lg);
   }
 
   /* About page mobile */
@@ -1868,11 +1763,6 @@ main {
   /* Posts page mobile */
   .posts-stats {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-sm);
-  }
-
-  .stat-card {
-    padding: var(--space-md);
   }
 
   .stat-value {
@@ -1884,34 +1774,12 @@ main {
   }
 
   .filter-btn {
-    padding: 10px 18px;
-    font-size: 0.875rem;
+    padding: 8px 16px;
+    font-size: 0.8125rem;
   }
 
   .connect-links {
     grid-template-columns: 1fr;
-  }
-
-  .connect-card {
-    padding: var(--space-md);
-  }
-
-  /* Reduce animation on mobile for performance */
-  .hero::before,
-  .post-card::before,
-  .page-layout::before,
-  .page-layout::after {
-    display: none;
-  }
-
-  /* Disable hover transforms on touch devices */
-  @media (hover: none) {
-    .tech-pill:hover,
-    .post-card:hover,
-    .social-link:hover,
-    .focus-item:hover {
-      transform: none;
-    }
   }
 }
 
