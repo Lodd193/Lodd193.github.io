@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Learning Topic Modelling: LDA, NMF, and Clinical BERT for Healthcare Text | Richard Lodder, MBA, MSc</title>
+  <meta name="description" content="Comparing LDA and NMF for topic modelling on NHS complaint data, fine-tuning thematic analysis, and exploring Clinical BERT transformers for healthcare text" />
+  <link rel="stylesheet" href="../../../styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <a href="../../../index.html" class="brand__link">Richard Lodder, MBA, MSc</a>
+        <span class="brand__tag">Data Science/Tech Journey</span>
+      </div>
+      <nav class="nav" aria-label="Main">
+        <a href="../../../index.html" class="nav__link">Home</a>
+        <a href="../../../posts.html" class="nav__link is-active">Posts</a>
+        <a href="../../../about.html" class="nav__link">About</a>
+        <a href="../../../resources.html" class="nav__link">Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Reading Progress Bar -->
+  <div class="reading-progress">
+    <div class="reading-progress__bar" id="progress-bar"></div>
+  </div>
+
+  <main class="container">
+    <div class="article-layout">
+      <article class="article" id="content">
+        <header class="article__header">
+          <h1>Learning Topic Modelling: LDA, NMF, and Clinical BERT for Healthcare Text</h1>
+          <div class="article__meta">
+            <time datetime="2026-01-18">18 Jan 2026</time>
+            <span>•</span>
+            <span>8 min read</span>
+            <span>•</span>
+            <span>📚 Learning</span>
+          </div>
+        </header>
+
+        <p class="article__lead">
+          I'm working on an NLP system to analyse 2,600+ NHS patient complaints, and honestly, I thought I'd just use some basic scikit-learn and be done in a day. Turns out topic modelling is way more nuanced than I expected. I've spent weeks comparing LDA and NMF, fine-tuning parameters, and now looking into transformer models like Clinical BERT. Here's what I've learned so far about making sense of healthcare text data.
+        </p>
+
+        <div class="article__content">
+          <h2>The Problem</h2>
+          <p>
+            I needed to build an analytics system for NHS patient feedback - specifically complaints from three different sources. The goal was to extract themes from thousands of text records so healthcare leadership could identify systemic issues and prioritise what to fix.
+          </p>
+          <p>
+            The constraints were strict: all processing had to happen on NHS premises (Information Governance requirements), no cloud APIs, and the system needed to work without internet connectivity. I couldn't just send the data to OpenAI or Claude - I had to build something that worked entirely locally.
+          </p>
+
+          <h2>Starting with LDA</h2>
+          <p>
+            I started with Latent Dirichlet Allocation (LDA). It's been around since 2003, so there's tons of documentation. LDA is a probabilistic model - it assumes documents are mixtures of topics, and topics are mixtures of words.
+          </p>
+
+          <h3>How LDA Works</h3>
+          <p>
+            LDA works backwards from what you'd expect. It assumes:
+          </p>
+          <ol>
+            <li>Each document has a distribution of topics (e.g., 60% Topic A, 40% Topic B)</li>
+            <li>Each topic has a distribution of words (e.g., Topic A: "nurse" 15%, "care" 12%, "ward" 8%)</li>
+            <li>By looking at the actual words in your documents, you can infer what the topics must be</li>
+          </ol>
+          <p>
+            With scikit-learn, it's pretty straightforward to get started:
+          </p>
+          <pre><code>from sklearn.decomposition import LatentDirichletAllocation
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+# Vectorize the text
+vectorizer = TfidfVectorizer(max_features=500, ngram_range=(1, 3))
+text_vectors = vectorizer.fit_transform(complaints_text)
+
+# Apply LDA
+lda_model = LatentDirichletAllocation(
+    n_components=10,  # number of topics
+    random_state=42
+)
+lda_topics = lda_model.fit_transform(text_vectors)</code></pre>
+
+          <h3>Initial Results: Mixed Success</h3>
+          <p>
+            My first LDA run with default parameters gave me... questionable results. Theme names like "Treatment & Lack" and "Emailed, Complainant & Poor" weren't exactly actionable for NHS leadership.
+          </p>
+          <p>
+            The problem? LDA was picking up generic complaint language rather than the actual clinical issues. Words like "lack", "poor", "concerned", and "unhappy" were dominating the topics because they appeared in almost every complaint.
+          </p>
+
+          <h2>Fine-Tuning the Analysis</h2>
+          <p>
+            This is where most of my time went. Getting good results from topic modelling isn't about the algorithm - it's about data preparation and parameter tuning.
+          </p>
+
+          <h3>Stopwords Are Critical</h3>
+          <p>
+            I had to expand my stopwords list massively - from the standard 180 English stopwords to over 220, including:
+          </p>
+          <ul>
+            <li><strong>Healthcare-specific terms:</strong> "hospital", "nhs", "trust", "patient", "ward" (too generic to be useful)</li>
+            <li><strong>Complaint meta-language:</strong> "lack", "poor", "left", "whilst", "pals", "emailed", "complainant"</li>
+            <li><strong>Sentiment words:</strong> "unhappy", "dissatisfied", "concerned", "raised"</li>
+          </ul>
+          <p>
+            This change fixed the problem. Theme names like "Bereavement & End-of-Life Care" and "Clinical Monitoring Failures" started appearing - actual clinical issues rather than generic complaint language.
+          </p>
+
+          <h3>Parameter Tuning</h3>
+          <p>
+            I experimented with several parameters that significantly affected results:
+          </p>
+          <ul>
+            <li><strong>n_components:</strong> Tested 3, 5, 7, 10, 12, and 15 topics. Found 7 was optimal for interpretability.</li>
+            <li><strong>max_features:</strong> Limited vocabulary to 500 most important terms to reduce noise</li>
+            <li><strong>ngram_range:</strong> Used (1,3) to capture phrases like "end of life" and "long wait times"</li>
+            <li><strong>min_df / max_df:</strong> Filtered very rare (< 2 docs) and very common (> 80%) terms</li>
+          </ul>
+
+          <h2>Enter NMF: A Different Approach</h2>
+          <p>
+            After getting LDA working reasonably well, I started reading about Non-Negative Matrix Factorization (NMF). It's another topic modelling technique, but it works quite differently from LDA. I honestly had no idea if it would be better or worse for healthcare text, so I decided to test both.
+          </p>
+
+          <h3>LDA vs NMF: Key Differences</h3>
+          <p>
+            Here's what I learned about how they differ:
+          </p>
+
+          <h4>LDA (Probabilistic Model)</h4>
+          <ul>
+            <li>Assumes a generative process - documents "generated" from topic mixtures</li>
+            <li>Produces probability distributions (topics sum to 1 for each document)</li>
+            <li>Better at capturing semantic relationships</li>
+            <li>Can handle "soft" topic assignments (document can be 30% Topic A, 70% Topic B)</li>
+            <li>Slower to train, especially with many documents</li>
+          </ul>
+
+          <h4>NMF (Linear Algebra)</h4>
+          <ul>
+            <li>Decomposes the document-term matrix into two smaller matrices</li>
+            <li>Produces positive values but not necessarily probabilities</li>
+            <li>Tends to create more distinct, separated topics</li>
+            <li>Faster to train and converge</li>
+            <li>Works particularly well with TF-IDF vectors</li>
+          </ul>
+
+          <h3>Testing NMF</h3>
+          <pre><code>from sklearn.decomposition import NMF
+
+# NMF works well with TF-IDF
+nmf_model = NMF(
+    n_components=10,
+    random_state=42,
+    max_iter=500
+)
+nmf_topics = nmf_model.fit_transform(text_vectors)</code></pre>
+
+          <h3>The Verdict: LDA Won (For My Use Case)</h3>
+          <p>
+            For my healthcare complaints data, LDA actually produced more coherent themes than NMF. Here's why I think that happened:
+          </p>
+          <ul>
+            <li><strong>Overlapping themes:</strong> Healthcare complaints often touch multiple issues (e.g., poor communication during end-of-life care). LDA's probabilistic nature handled this overlap better.</li>
+            <li><strong>Semantic relationships:</strong> LDA seemed better at capturing that "death", "deceased", and "bereavement" were related concepts.</li>
+            <li><strong>Clinical context:</strong> Medical terminology has lots of synonyms and related terms that LDA grouped more naturally.</li>
+          </ul>
+          <p>
+            That said, NMF was noticeably faster and might be better for other text analysis tasks where topics are more distinct and don't overlap as much.
+          </p>
+
+          <h2>Theme Coherence Testing</h2>
+          <p>
+            How do you know if you've got the "right" number of topics? I used coherence analysis to test different configurations:
+          </p>
+          <ul>
+            <li><strong>3 topics:</strong> Too broad, lost important distinctions</li>
+            <li><strong>5 topics:</strong> Best statistical fit (lowest perplexity)</li>
+            <li><strong>7 topics:</strong> Best balance of interpretability and granularity - my choice</li>
+            <li><strong>10 topics:</strong> Started introducing "noise" themes about complaint handling processes</li>
+            <li><strong>15 topics:</strong> Too granular, themes became overlapping and confusing</li>
+          </ul>
+          <p>
+            I went with 7 themes because while 5 had better statistical measures, 7 provided the level of detail that was actually useful for healthcare leaders making decisions.
+          </p>
+
+          <h2>The Limitation: Context and Clinical Nuance</h2>
+          <p>
+            Despite fine-tuning, both LDA and NMF have a fundamental limitation: they're bag-of-words approaches. They don't understand context, sentiment shifts, or clinical nuance.
+          </p>
+          <p>
+            Consider these two sentences:
+          </p>
+          <ul>
+            <li>"The patient did not receive adequate pain management"</li>
+            <li>"The patient received adequate pain management"</li>
+          </ul>
+          <p>
+            To LDA/NMF, these look very similar - they share most of the same words. But they mean opposite things. This is where transformers come in.
+          </p>
+
+          <h2>Looking Ahead: Transformer Models</h2>
+          <p>
+            Transformer models like BERT (Bidirectional Encoder Representations from Transformers) understand context by looking at words in relation to all other words in a sentence, not just their frequency.
+          </p>
+
+          <h3>Why Transformers Are Different</h3>
+          <ul>
+            <li><strong>Bidirectional context:</strong> They read both left and right of each word to understand meaning</li>
+            <li><strong>Attention mechanism:</strong> They learn which words are important for understanding others</li>
+            <li><strong>Pre-trained knowledge:</strong> Models come with understanding of language learned from millions of documents</li>
+            <li><strong>Semantic understanding:</strong> They capture that "didn't receive adequate care" is negative even though it contains "adequate"</li>
+          </ul>
+
+          <h3>Clinical BERT: Healthcare-Specific Language Understanding</h3>
+          <p>
+            Clinical BERT is BERT that's been pre-trained on millions of clinical notes, medical journals, and healthcare text. It understands medical terminology, abbreviations, and clinical context in a way that standard BERT doesn't.
+          </p>
+          <p>
+            For example, Clinical BERT knows:
+          </p>
+          <ul>
+            <li>"Obs" means "observations" (vital signs monitoring) in healthcare context</li>
+            <li>"PRN" is Latin for "as needed" medication</li>
+            <li>"NEWS score" relates to patient deterioration detection</li>
+            <li>The difference between "acute" (severe) and "chronic" (long-term) conditions</li>
+          </ul>
+
+          <h3>Implementation Considerations</h3>
+          <p>
+            I haven't implemented Clinical BERT yet (still getting the classical methods working properly), but here's what I'm learning about what it would take:
+          </p>
+          <ul>
+            <li><strong>Computational resources:</strong> Transformers need way more memory and processing power than LDA</li>
+            <li><strong>On-premises deployment:</strong> Models like Clinical BERT can run locally via Hugging Face Transformers (no cloud needed)</li>
+            <li><strong>Fine-tuning:</strong> You can further train it on NHS-specific complaint language</li>
+            <li><strong>Trade-offs:</strong> Much slower than LDA/NMF but probably more accurate for clinical text</li>
+          </ul>
+
+          <h3>Next Steps for My Project</h3>
+          <p>
+            Here's what I'm planning to do next:
+          </p>
+          <ol>
+            <li>Keep refining the LDA approach as a baseline (it's working well enough for now)</li>
+            <li>Set up a local Clinical BERT model using Hugging Face</li>
+            <li>Run the same complaint text through both systems and compare results</li>
+            <li>Figure out if the computational overhead of transformers is actually worth the accuracy gains</li>
+            <li>If Clinical BERT looks promising, fine-tune it on NHS complaints data</li>
+          </ol>
+
+          <h2>What I Learned</h2>
+
+          <h3>Start Simple, Then Iterate</h3>
+          <p>
+            Starting with LDA was the right call. It helped me understand the data, spot quality issues, and get a baseline working. Jumping straight to transformers would have been a waste of time - I wouldn't have known what "good" looks like.
+          </p>
+
+          <h3>Data Preparation > Algorithm Choice</h3>
+          <p>
+            The biggest improvement came from better stopwords, not from switching algorithms. Getting your data preparation right - tokenisation, stopwords, n-grams - matters way more than which fancy model you use.
+          </p>
+
+          <h3>Domain Knowledge Is Essential</h3>
+          <p>
+            Working in healthcare complaints gave me an advantage - I knew which terms were clinically meaningful versus generic complaint language. For example, I knew "obs" (observations/vital signs monitoring) was critical to identify monitoring failures, while "unhappy" and "disappointed" were just noise.
+          </p>
+
+          <h3>Metrics Don't Tell the Whole Story</h3>
+          <p>
+            The 5-topic model had the best perplexity score, but the 7-topic model was more useful for the actual healthcare leaders reading the reports. Sometimes you need to ignore the metrics and trust human evaluation, especially when real decisions are being made.
+          </p>
+
+          <h3>Context Matters</h3>
+          <p>
+            Bag-of-words approaches have limitations for clinical text. I'm looking at transformers not because they're trendy, but because I genuinely need the semantic understanding they provide. LDA can't tell the difference between "received adequate care" and "did not receive adequate care" - that's a problem.
+          </p>
+
+          <h2>Resources and Tools</h2>
+          <ul>
+            <li><strong>scikit-learn:</strong> Excellent for LDA and NMF, well-documented, production-ready</li>
+            <li><strong>Hugging Face Transformers:</strong> For Clinical BERT and other transformer models</li>
+            <li><strong>VADER & TextBlob:</strong> For sentiment analysis preprocessing</li>
+            <li><strong>spaCy:</strong> For tokenisation and entity recognition</li>
+            <li><strong>Ollama:</strong> For running local LLMs like Llama 3.1 (alternative to transformers)</li>
+          </ul>
+
+          <h2>Key Takeaways</h2>
+          <ol>
+            <li><strong>LDA vs NMF:</strong> LDA is probabilistic and handles overlapping topics well; NMF is faster and creates more distinct topics. Choose based on your data characteristics.</li>
+            <li><strong>Stopwords are critical:</strong> Domain-specific stopwords (healthcare terms, complaint language) dramatically improve theme quality.</li>
+            <li><strong>Coherence testing guides parameters:</strong> Test multiple configurations (3-15 topics) to find the sweet spot between statistical fit and interpretability.</li>
+            <li><strong>Transformers capture context:</strong> Classical methods work for frequency patterns, but transformers understand semantic meaning and clinical nuance.</li>
+            <li><strong>Clinical BERT for healthcare:</strong> Pre-trained on medical text, understands clinical terminology, can run on-premises for NHS compliance.</li>
+            <li><strong>Iterate and compare:</strong> Start simple, measure results, add complexity only when needed. Always benchmark new approaches against your baseline.</li>
+          </ol>
+
+          <p>
+            I've gone from basic LDA to potentially implementing Clinical BERT, and each step has taught me something about NLP, healthcare data, and the trade-offs between speed, accuracy, and computational resources. Whether you're analysing patient feedback, research papers, or any other domain-specific text, these lessons probably apply.
+          </p>
+
+          <p>
+            If you're starting a similar project: begin with classical methods to understand your data, spend time on stopwords and preprocessing (this is where the real improvement comes from), then consider transformers when you hit the limits of bag-of-words approaches. The computational overhead is only worth it if context actually matters for your use case.
+          </p>
+        </div>
+
+        <a href="../../../posts.html" class="back-link">Back to Posts</a>
+      </article>
+
+      <aside class="sidebar">
+        <div class="sidebar__inner">
+          <!-- Table of Contents -->
+          <div class="sidebar__section">
+            <h2 class="sidebar__title">On This Page</h2>
+            <nav class="toc">
+              <ul>
+                <li class="toc__item"><a href="#content" class="toc__link">The Challenge</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Starting with LDA</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Fine-Tuning the Analysis</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Enter NMF</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Theme Coherence Testing</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Transformer Models</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Clinical BERT</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">What I Learned</a></li>
+                <li class="toc__item"><a href="#content" class="toc__link">Key Takeaways</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <!-- Post Meta -->
+          <div class="sidebar__section">
+            <h2 class="sidebar__title">Post Details</h2>
+            <div class="post-meta">
+              <div class="post-meta__item">Published 18 Jan 2026</div>
+              <div class="post-meta__item">8 minute read</div>
+              <div class="post-meta__item">Category: Learning</div>
+              <div class="post-meta__item">Tags: NLP, Healthcare, Machine Learning, LDA, NMF, BERT, Transformers</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Richard Lodder, MBA, MSc · Built with GitHub Pages</p>
+    </footer>
+  </main>
+
+  <script>
+    // Update year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+      const article = document.querySelector('.article__content');
+      const progressBar = document.getElementById('progress-bar');
+
+      if (article && progressBar) {
+        const articleTop = article.offsetTop;
+        const articleHeight = article.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrollY = window.scrollY;
+
+        const progress = ((scrollY - articleTop + windowHeight) / articleHeight) * 100;
+        const boundedProgress = Math.min(Math.max(progress, 0), 100);
+
+        progressBar.style.width = boundedProgress + '%';
+      }
+    });
+  </script>
+</body>
+</html>
