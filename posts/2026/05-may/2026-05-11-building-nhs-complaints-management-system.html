@@ -47,7 +47,7 @@
 
           <h2>The problem worth solving</h2>
           <p>
-            Large NHS trusts receive thousands of complaints and PALS (Patient Advice and Liaison Service) queries every year. Each formal complaint carries a regulatory response deadline - the standard target is 65 working days, though trusts set their own internal targets within that. Miss the deadline, and there are consequences for the trust. Respond poorly, and it can escalate to the Parliamentary and Health Service Ombudsman (PHSO).
+            Large NHS trusts receive thousands of complaints and PALS (Patient Advice and Liaison Service) queries every year. Each formal complaint carries a response deadline - NHS trusts set their own targets, and missing them has real consequences. Respond poorly as well as late, and the case can escalate to the Parliamentary and Health Service Ombudsman (PHSO).
           </p>
           <p>
             The challenge I kept seeing was that the underlying process in many trusts is still largely manual: spreadsheets, shared inboxes, and a lot of chasing. Case managers manually track deadlines, code cases for reporting, and try to identify which complaints might have patient safety implications requiring a parallel investigation under PSIRF (the Patient Safety Incident Response Framework). Without consistent structured coding, the data coming out the other end for monthly reporting is unreliable. And without structured data, spotting patterns - like a particular ward generating repeat complaints about the same issue - relies on someone reading everything and keeping it in their head.
@@ -160,7 +160,7 @@ with get_db() as db:
 
           <h2>Working days and deadlines</h2>
           <p>
-            The response deadline sounds simple until you have to calculate it. Working days exclude weekends and UK bank holidays, and trusts set their own internal targets within the NHS-wide 65-working-day outer limit. I wrote a small working days service that calculates deadlines from the date received, marks cases as overdue when the deadline passes, and surfaces a dedicated overdue queue on the dashboard.
+            Response deadlines sound simple until you have to calculate them. Working days exclude weekends and UK bank holidays, and each trust has its own target to hit. I wrote a small working days service that calculates deadlines from the date received, marks cases as overdue when the deadline passes, and surfaces a dedicated overdue queue on the dashboard.
           </p>
           <p>
             The dashboard also shows cases due within the current week, cases breaching by month (for trend reporting), and an overdue-by-age breakdown: 1-5 days late, 6-15 days, 15-30 days, 30+ days. These buckets tell you very different things about capacity and workload management.
