@@ -47,10 +47,10 @@
 
           <h2>The problem worth solving</h2>
           <p>
-            University Hospitals Birmingham receives thousands of complaints and PALS (Patient Advice and Liaison Service) queries every year. Each one has a regulatory response deadline - 25 working days for formal complaints under the NHS complaints regulations. Miss the deadline, and there are consequences for the trust. Respond poorly, and it can escalate to the Parliamentary and Health Service Ombudsman (PHSO).
+            Large NHS trusts receive thousands of complaints and PALS (Patient Advice and Liaison Service) queries every year. Each formal complaint carries a regulatory response deadline - the standard target is 65 working days, though trusts set their own internal targets within that. Miss the deadline, and there are consequences for the trust. Respond poorly, and it can escalate to the Parliamentary and Health Service Ombudsman (PHSO).
           </p>
           <p>
-            The existing process relied heavily on individual case managers manually tracking deadlines, coding cases for reporting, and identifying which complaints might have patient safety implications requiring a parallel investigation under PSIRF (the Patient Safety Incident Response Framework). There was no consistent structured coding, which meant the data coming out the other end for monthly reporting was unreliable. And there was no easy way to spot patterns - like a particular ward generating repeat complaints about the same issue.
+            The challenge I kept seeing was that the underlying process in many trusts is still largely manual: spreadsheets, shared inboxes, and a lot of chasing. Case managers manually track deadlines, code cases for reporting, and try to identify which complaints might have patient safety implications requiring a parallel investigation under PSIRF (the Patient Safety Incident Response Framework). Without consistent structured coding, the data coming out the other end for monthly reporting is unreliable. And without structured data, spotting patterns - like a particular ward generating repeat complaints about the same issue - relies on someone reading everything and keeping it in their head.
           </p>
           <p>
             I wanted to build something that addressed all of this: a proper case management workflow, AI-assisted classification and coding, deadline tracking, consent management, and analytics. Importantly, it had to stay within NHS data governance constraints - synthetic data only during development, designed to run on NHS infrastructure in production.
@@ -160,7 +160,7 @@ with get_db() as db:
 
           <h2>Working days and deadlines</h2>
           <p>
-            The 25-working-day response deadline sounds simple until you have to calculate it. Working days exclude weekends and UK bank holidays. I wrote a small working days service that calculates deadlines from the date received, marks cases as overdue when the deadline passes, and surfaces a dedicated overdue queue on the dashboard.
+            The response deadline sounds simple until you have to calculate it. Working days exclude weekends and UK bank holidays, and trusts set their own internal targets within the NHS-wide 65-working-day outer limit. I wrote a small working days service that calculates deadlines from the date received, marks cases as overdue when the deadline passes, and surfaces a dedicated overdue queue on the dashboard.
           </p>
           <p>
             The dashboard also shows cases due within the current week, cases breaching by month (for trend reporting), and an overdue-by-age breakdown: 1-5 days late, 6-15 days, 15-30 days, 30+ days. These buckets tell you very different things about capacity and workload management.
@@ -182,7 +182,7 @@ with get_db() as db:
 
           <h2>What's next</h2>
           <p>
-            The system is currently running on synthetic data. The next phase is moving to a real deployment - Railway for the API, Supabase (PostgreSQL) for the database, and Vercel for the frontend. The longer-term target is Azure, which is the standard NHS cloud provider, but a Railway + Supabase deployment works well for a demonstration and early adoption phase.
+            The system is currently running on synthetic data. The next phase is moving to a production-ready deployment - Railway for the API, Supabase (PostgreSQL) for the database, and Vercel for the frontend. The longer-term target is Azure, which is the standard NHS cloud provider, but a Railway + Supabase stack works well for a demonstration and pilot phase.
           </p>
           <p>
             On the AI side, I want to build a dedicated DeBERTa model fine-tuned on NHS complaint text for HCAT classification - the NLP work I've been doing separately feeds into this directly. The goal is a model that's trained on real NHS complaint patterns rather than relying on a general-purpose LLM prompt each time.
