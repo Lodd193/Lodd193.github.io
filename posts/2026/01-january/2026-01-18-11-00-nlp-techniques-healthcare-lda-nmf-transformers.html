@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Learning Topic Modelling: LDA, NMF, and Clinical BERT for Healthcare Text | Richard Lodder, MBA, MSc</title>
-  <meta name="description" content="Comparing LDA and NMF for topic modelling on NHS complaint data, fine-tuning thematic analysis, and exploring Clinical BERT transformers for healthcare text" />
+  <meta name="description" content="Comparing LDA and NMF for topic modelling on healthcare feedback text, fine-tuning thematic analysis, and exploring Clinical BERT transformers for healthcare text" />
   <link rel="stylesheet" href="../../../styles.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
 </head>
@@ -46,16 +46,16 @@
         </header>
 
         <p class="article__lead">
-          I'm working on an NLP system to analyse 2,600+ NHS patient complaints, and honestly, I thought I'd just use some basic scikit-learn and be done in a day. Turns out topic modelling is way more nuanced than I expected. I've spent weeks comparing LDA and NMF, fine-tuning parameters, and now looking into transformer models like Clinical BERT. Here's what I've learned so far about making sense of healthcare text data.
+          I've been learning topic modelling on healthcare feedback text, and honestly, I thought I'd just use some basic scikit-learn and be done in a day. Turns out topic modelling is way more nuanced than I expected. I've spent weeks comparing LDA and NMF, fine-tuning parameters, and now looking into transformer models like Clinical BERT. Here's what I've learned so far about making sense of healthcare text data.
         </p>
 
         <div class="article__content">
           <h2>The Problem</h2>
           <p>
-            I needed to build an analytics system for NHS patient feedback - specifically complaints from three different sources. The goal was to extract themes from thousands of text records so healthcare leadership could identify systemic issues and prioritise what to fix.
+            The goal was to pull recurring themes out of free-text feedback, so the people reading the reports could see systemic issues and prioritise what to fix.
           </p>
           <p>
-            The constraints were strict: all processing had to happen on NHS premises (Information Governance requirements), no cloud APIs, and the system needed to work without internet connectivity. I couldn't just send the data to OpenAI or Claude - I had to build something that worked entirely locally.
+            Healthcare text is sensitive, so I set myself a strict constraint: everything runs locally, with no cloud APIs. That rules out sending the text to OpenAI or Claude, so I had to build something that worked entirely on my own machine.
           </p>
 
           <h2>Starting with LDA</h2>
@@ -242,21 +242,9 @@ nmf_topics = nmf_model.fit_transform(text_vectors)</code></pre>
           <ul>
             <li><strong>Computational resources:</strong> Transformers need way more memory and processing power than LDA</li>
             <li><strong>On-premises deployment:</strong> Models like Clinical BERT can run locally via Hugging Face Transformers (no cloud needed)</li>
-            <li><strong>Fine-tuning:</strong> You can further train it on NHS-specific complaint language</li>
+            <li><strong>Fine-tuning:</strong> You can further train it on your own domain text</li>
             <li><strong>Trade-offs:</strong> Much slower than LDA/NMF but probably more accurate for clinical text</li>
           </ul>
-
-          <h3>Next Steps for My Project</h3>
-          <p>
-            Here's what I'm planning to do next:
-          </p>
-          <ol>
-            <li>Keep refining the LDA approach as a baseline (it's working well enough for now)</li>
-            <li>Set up a local Clinical BERT model using Hugging Face</li>
-            <li>Run the same complaint text through both systems and compare results</li>
-            <li>Figure out if the computational overhead of transformers is actually worth the accuracy gains</li>
-            <li>If Clinical BERT looks promising, fine-tune it on NHS complaints data</li>
-          </ol>
 
           <h2>What I Learned</h2>
 
@@ -300,7 +288,7 @@ nmf_topics = nmf_model.fit_transform(text_vectors)</code></pre>
             <li><strong>Stopwords are critical:</strong> Domain-specific stopwords (healthcare terms, complaint language) dramatically improve theme quality.</li>
             <li><strong>Coherence testing guides parameters:</strong> Test multiple configurations (3-15 topics) to find the sweet spot between statistical fit and interpretability.</li>
             <li><strong>Transformers capture context:</strong> Classical methods work for frequency patterns, but transformers understand semantic meaning and clinical nuance.</li>
-            <li><strong>Clinical BERT for healthcare:</strong> Pre-trained on medical text, understands clinical terminology, can run on-premises for NHS compliance.</li>
+            <li><strong>Clinical BERT for healthcare:</strong> Pre-trained on medical text, understands clinical terminology, can run on-premises for data protection compliance.</li>
             <li><strong>Iterate and compare:</strong> Start simple, measure results, add complexity only when needed. Always benchmark new approaches against your baseline.</li>
           </ol>
 
