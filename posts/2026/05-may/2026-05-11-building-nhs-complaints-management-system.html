@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Building an AI-Assisted NHS Complaints Management System | Richard Lodder, MBA, MSc</title>
-  <meta name="description" content="How I built a full-stack FastAPI + Next.js case management system for NHS complaints and PALS queries, with AI triage, HCAT coding, PSIRF flagging, consent flows, and an analytics dashboard." />
+  <title>Building a Complaints Case Management System | Richard Lodder, MBA, MSc</title>
+  <meta name="description" content="Why I built a case management system for healthcare complaints, why a person confirms every AI suggestion, and a SQLAlchemy lesson along the way." />
   <link rel="stylesheet" href="../../../styles.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
 </head>
@@ -35,163 +35,63 @@
     <div class="article-layout">
       <article class="article">
         <header class="article__header">
-          <h1>Building an AI-Assisted NHS Complaints Management System</h1>
-          <p class="article__meta">11 May 2026 · 10 min read · 🔨 Building</p>
+          <h1>Building a Complaints Case Management System</h1>
+          <p class="article__meta">11 May 2026 · 3 min read · 🔨 Building</p>
         </header>
 
         <p class="article__lead">
-          NHS complaint handling is, in most trusts, still largely manual: spreadsheets, shared inboxes, and a lot of chasing. I've spent the last few months building a full-stack case management system that changes that - with AI-assisted triage, structured coding, deadline tracking, and an analytics dashboard that actually surfaces patterns you can act on.
+          Complaint handling in healthcare still runs largely on spreadsheets, shared inboxes and a lot of chasing. Over the last few months I've built a full-stack case management system to change that. This post covers why I built it, the principle behind it and one lesson I learned the hard way.
         </p>
 
         <div class="article__content">
 
           <h2>The problem worth solving</h2>
           <p>
-            Large NHS trusts receive thousands of complaints and PALS (Patient Advice and Liaison Service) queries every year. Each formal complaint carries a response deadline - NHS trusts set their own targets, and missing them has real consequences. Respond poorly as well as late, and the case can escalate to the Parliamentary and Health Service Ombudsman (PHSO).
+            Large hospital trusts receive thousands of complaints and PALS queries every year. Each formal complaint has a response deadline, and a late or poor response can end up with the Parliamentary and Health Service Ombudsman.
           </p>
           <p>
-            The challenge I kept seeing was that the underlying process in many trusts is still largely manual: spreadsheets, shared inboxes, and a lot of chasing. Case managers manually track deadlines, code cases for reporting, and try to identify which complaints might have patient safety implications requiring a parallel investigation under PSIRF (the Patient Safety Incident Response Framework). Without consistent structured coding, the data coming out the other end for monthly reporting is unreliable. And without structured data, spotting patterns - like a particular ward generating repeat complaints about the same issue - relies on someone reading everything and keeping it in their head.
-          </p>
-          <p>
-            I wanted to build something that addressed all of this: a proper case management workflow, AI-assisted classification and coding, deadline tracking, consent management, and analytics. Importantly, it had to stay within NHS data governance constraints - synthetic data only during development, designed to run on NHS infrastructure in production.
+            When the work runs on spreadsheets and inboxes, deadlines slip and coding varies from one person to the next. Spotting a pattern, such as one ward generating repeat complaints about the same issue, relies on someone reading everything and keeping it in their head. I wanted one place to run the whole process, capturing structured data from the start so an organisation can learn from it.
           </p>
 
-          <h2>From prototype to production stack</h2>
+          <h2>From prototype to a proper stack</h2>
           <p>
-            The initial prototype used Streamlit, which is great for rapid data exploration but not for a multi-user, workflow-driven application. I stripped it out entirely and rebuilt on:
-          </p>
-          <ul>
-            <li><strong>Backend:</strong> FastAPI (Python) with SQLAlchemy ORM, Alembic for migrations, SQLite locally and PostgreSQL on Railway for a demo environment</li>
-            <li><strong>Frontend:</strong> Next.js 16 (App Router) with TypeScript, no component library - just Tailwind CSS and Recharts for charts</li>
-            <li><strong>Auth:</strong> JWT tokens, role-based access (admin, patient_relations_manager, case_manager, responder)</li>
-            <li><strong>AI features:</strong> Claude API for triage, HCAT coding suggestions, PSIRF flagging, and adequacy review of complaint responses</li>
-          </ul>
-          <p>
-            The NHS has a very specific visual language, so I built the UI around the NHS colour palette - the characteristic NHS blue (#005EB8), warm background tones, and card-based layouts. It needed to feel familiar to the staff who'd be using it, not like a generic SaaS tool.
+            I started in Streamlit, which is great for exploring data but not for a multi-user workflow app. I rebuilt it as a Python API using FastAPI and SQLAlchemy, with a Next.js and TypeScript front end. Development uses synthetic data only.
           </p>
 
-          <h2>The case lifecycle</h2>
+          <h2>The AI suggests, a person decides</h2>
           <p>
-            A case moves through a defined workflow depending on its type. Formal complaints follow a multi-stage process:
+            This is the design decision I'm most deliberate about. The AI does nothing on its own. Every suggestion it makes is reviewed and confirmed by a member of staff before it becomes part of the case record.
           </p>
-          <ol>
-            <li><strong>Intake:</strong> Either submitted via a public-facing form or logged directly by staff. Narrative, complainant details, patient identifiers, and equality monitoring data are all captured at this point.</li>
-            <li><strong>Triage:</strong> AI suggests a severity (low/medium/high/critical) and complaint tier (basic/regular/complex). A case manager reviews and confirms.</li>
-            <li><strong>Concern identification:</strong> AI extracts discrete concerns from the narrative. Again, a human confirms or edits each one before they're treated as authoritative.</li>
-            <li><strong>HCAT coding:</strong> Cases are coded against the Healthcare Complaints Analysis Tool v3 taxonomy. AI suggests category codings and harm level; the case manager confirms.</li>
-            <li><strong>PSIRF check:</strong> AI flags whether the case has indicators that might require a separate patient safety investigation - never events, serious harm, ongoing safety risks, deaths where care is a concern.</li>
-            <li><strong>Response workflow:</strong> Individual concerns are assigned to clinical responders. They submit responses, which are reviewed for adequacy before the case can progress to drafting the final letter.</li>
-            <li><strong>Final response:</strong> The case manager records when the response letter was sent, who signed it, whether an apology was offered, and whether PHSO signposting was included.</li>
-            <li><strong>Closure or escalation:</strong> Cases can be closed, marked as reopened if the complainant escalates, or flagged for PHSO referral.</li>
-          </ol>
           <p>
-            PALS queries follow a lighter parallel workflow - local resolution rather than the full investigation process. The same intake form handles both, routing to the appropriate workflow automatically based on the nature of the contact.
+            The stakes are high, staff are rightly sceptical of automation in this kind of work, and any model will make mistakes. The review step catches them. The AI earns trust by being useful, not by being autonomous.
           </p>
 
-          <h2>Human-in-the-loop AI throughout</h2>
+          <h2>A bug worth sharing</h2>
           <p>
-            This is probably the design decision I'm most deliberate about. The AI does nothing autonomously. Every AI suggestion - severity, tier, concern list, HCAT coding, PSIRF flags, adequacy assessment - requires a human to review and confirm before it's treated as the case record.
-          </p>
-          <p>
-            This matters for a few reasons. First, the regulatory and clinical stakes are high - an AI misclassifying a serious harm case as low severity has real consequences. Second, NHS staff are rightly sceptical of automated systems in high-stakes workflows. Third, the model will make mistakes, and the human review step catches them. The AI earns trust gradually by being useful, not by being autonomous.
-          </p>
-          <p>
-            The triage endpoint prompt is structured to explain its reasoning, not just return a label:
-          </p>
-          <pre><code>The AI returns:
-{
-  "severity": "high",
-  "tier": "complex",
-  "confidence": 0.87,
-  "reasoning": "The complaint describes a delay in diagnosis
-    following a referral that the complainant alleges resulted
-    in significant clinical harm. The specific allegations of
-    missed diagnosis and the harm described indicate high
-    severity. The complexity of the clinical issues and the
-    involvement of multiple departments suggests a complex
-    tier investigation will be required."
-}</code></pre>
-          <p>
-            The case manager sees the reasoning, not just the label. That context is what makes the suggestion useful rather than a black box to either accept or reject blind.
-          </p>
-
-          <h2>HCAT coding at scale</h2>
-          <p>
-            HCAT v3 is the standard NHS taxonomy for complaint coding. It covers categories like Clinical Treatment, Communication, and Attitude, with subcategories under each. Manually coding thousands of complaints consistently is hard - there's always variation between coders. AI coding helps with both speed and consistency.
-          </p>
-          <p>
-            The model returns a structured array of category codings, each with a category, subcategory, severity score (1-5), and the stages of the care pathway involved. This structure feeds directly into the analytics dashboard.
-          </p>
-          <p>
-            One challenge was the SQLAlchemy <code>DetachedInstanceError</code> I kept hitting on the analytics endpoints. The ORM objects were being accessed after the database session closed, because I was building the response dicts outside the context manager. The fix was simple once I understood it - move all attribute access inside the <code>with get_db() as db:</code> block:
+            One problem cost me longer than it should have. My reporting endpoints kept throwing SQLAlchemy's <code>DetachedInstanceError</code>. I was building the response after the database session had closed, so the ORM objects could no longer load their attributes. The fix was to do all attribute access inside the session block:
           </p>
           <pre><code># Wrong - attributes accessed after db.close()
 with get_db() as db:
-    codings = db.query(HCATCoding).all()
+    records = db.query(Record).all()
 
-for coding in codings:
-    for entry in coding.category_codings:  # DetachedInstanceError here
+for record in records:
+    for item in record.items:  # DetachedInstanceError here
         ...
 
 # Correct - all access inside the context
 with get_db() as db:
-    codings = db.query(HCATCoding).all()
-    for coding in codings:
-        for entry in coding.category_codings:
+    records = db.query(Record).all()
+    for record in records:
+        for item in record.items:
             # process here, before db.close()
             ...</code></pre>
           <p>
-            The error message was completely misleading - it looked like a missing relationship configuration issue rather than a session lifecycle problem.
+            The error message pointed me towards a relationship configuration problem, which sent me the wrong way for a while. It was a session lifecycle problem all along.
           </p>
 
-          <h2>The consent flow</h2>
+          <h2>What I took from it</h2>
           <p>
-            Complaints on behalf of a patient (rather than the patient themselves) require explicit patient consent before clinical details can be discussed. Managing this in a spreadsheet is painful. I built a proper digital consent flow:
-          </p>
-          <ol>
-            <li>When a complaint is submitted on behalf of a patient, the intake form allows for a "draft" submission where consent is pending.</li>
-            <li>An email is sent to the patient with a unique token link (valid for 72 hours).</li>
-            <li>The patient clicks the link, reads a summary of what's being shared, and signs using a canvas-based digital signature pad.</li>
-            <li>On signing, the draft is promoted to a live case. The consent details - signature, name, and timestamp - are stored against the case record.</li>
-          </ol>
-          <p>
-            If the patient declines, the complaint can still be acknowledged but clinical details cannot be discussed in the response. This is an important legal distinction that the system enforces structurally rather than relying on staff to remember.
-          </p>
-
-          <h2>Working days and deadlines</h2>
-          <p>
-            Response deadlines sound simple until you have to calculate them. Working days exclude weekends and UK bank holidays, and each trust has its own target to hit. I wrote a small working days service that calculates deadlines from the date received, marks cases as overdue when the deadline passes, and surfaces a dedicated overdue queue on the dashboard.
-          </p>
-          <p>
-            The dashboard also shows cases due within the current week, cases breaching by month (for trend reporting), and an overdue-by-age breakdown: 1-5 days late, 6-15 days, 15-30 days, 30+ days. These buckets tell you very different things about capacity and workload management.
-          </p>
-
-          <h2>The analytics dashboard</h2>
-          <p>
-            This is the part I'm most pleased with, because it's where the structured data the system collects becomes genuinely useful for improvement work. I used Recharts (already in the project for the operational dashboard) to build four main panels:
-          </p>
-          <ul>
-            <li><strong>Volume and severity by site:</strong> A stacked horizontal bar chart showing complaints by severity level for each hospital site. Immediately shows which sites are generating the most high/critical cases.</li>
-            <li><strong>HCAT theme frequency:</strong> A bar chart of the top complaint categories, with click-to-drilldown into subcategories. Clicking "Clinical Treatment" reveals the specific subcategories - medication errors, surgical complications, diagnosis failures - ranked by frequency. This required no extra API call; the subcategory data is nested in the initial response.</li>
-            <li><strong>Demographic breakdown:</strong> Age range, gender, ethnicity, religion, and language tabs showing who is making complaints. Useful for equality monitoring and identifying groups who may be under-represented.</li>
-            <li><strong>Action plan themes and status:</strong> A bar chart of action plan themes and a donut chart of action statuses (pending, in progress, complete, overdue). This is the learning side - are we actually following through on the actions we said we'd take?</li>
-          </ul>
-          <p>
-            The whole dashboard is filterable by site, case type (complaints vs PALS), severity, and date range. All four charts update simultaneously when a filter is applied. The site options are populated dynamically from the database rather than being hardcoded, so the filter stays accurate as the trust's sites change over time.
-          </p>
-
-          <h2>What's next</h2>
-          <p>
-            The system is currently running on synthetic data. The next phase is moving to a production-ready deployment - Railway for the API, Supabase (PostgreSQL) for the database, and Vercel for the frontend. The longer-term target is Azure, which is the standard NHS cloud provider, but a Railway + Supabase stack works well for a demonstration and pilot phase.
-          </p>
-          <p>
-            On the AI side, I want to build a dedicated DeBERTa model fine-tuned on NHS complaint text for HCAT classification - the NLP work I've been doing separately feeds into this directly. The goal is a model that's trained on real NHS complaint patterns rather than relying on a general-purpose LLM prompt each time.
-          </p>
-          <p>
-            There's also more work to do on the analytics side. The HCAT drilldown is a start, but real complaints analytics needs things like trend lines, period-over-period comparison, and the ability to flag emerging themes before they become systemic problems.
-          </p>
-          <p>
-            Building this has reminded me that the most valuable thing I can do with data science skills in an NHS context isn't necessarily training models - it's building the infrastructure that captures clean, structured data in the first place. The insights are only as good as the data feeding them.
+            The most valuable thing I can do with data science skills in this space isn't necessarily training models. It's building the systems that capture clean, structured data in the first place. The insights are only as good as the data feeding them.
           </p>
 
           <a href="../../../posts.html" class="back-link">Back to Posts</a>
@@ -214,7 +114,7 @@ with get_db() as db:
             <h2 class="sidebar__title">Post Details</h2>
             <div class="post-meta">
               <div class="post-meta__item">Published 11 May 2026</div>
-              <div class="post-meta__item">10 min read</div>
+              <div class="post-meta__item">3 min read</div>
               <div class="post-meta__item">🔨 Building</div>
             </div>
           </div>
